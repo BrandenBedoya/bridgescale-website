@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-navy: #0b1f3a;
+  --color-brand-navy-dark: #00152b;
+  --color-brand-navy-light: #162e52;
+  --color-brand-orange: #d97706;
+  --color-brand-gold: #f5a623;
+  --color-brand-gold-hover: #e09212;
+  --color-brand-gold-light: #fef3c7;
+  --shadow-gold-glow: 0 0 25px rgba(245, 166, 35, 0.3);
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+@layer components {
+  /* Primary CTA Button */
+  .btn-primary {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: var(--color-brand-navy);
+    color: white;
+    font-weight: 700;
+    font-size: 1.125rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1), 0 10px 15px -3px rgb(148 163 184 / 0.3);
+    transition: all 0.3s;
+    text-align: center;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-brand-navy-light);
+    transform: translateY(-0.25rem);
+  }
+  
+  /* Secondary Button (Gold) */
+  .btn-secondary {
+    display: inline-block;
+    padding: 1.25rem 3rem;
+    background-color: var(--color-brand-gold);
+    color: var(--color-brand-navy);
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-gold-glow);
+    transition: all 0.3s;
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--color-brand-gold-hover);
+    transform: translateY(-0.25rem);
+  }
+  
+  /* Outlined Button */
+  .btn-outline {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: white;
+    border: 2px solid rgb(226 232 240);
+    color: var(--color-brand-navy);
+    font-weight: 600;
+    font-size: 1.125rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    text-align: center;
+  }
+  
+  .btn-outline:hover {
+    border-color: var(--color-brand-navy);
+  }
+  
+  /* Feature Card */
+  .feature-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    transition: all 0.3s;
+  }
+  
+  .feature-card:hover {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    transform: translateY(-0.25rem);
+  }
+  
+  /* Icon Container */
+  .icon-box {
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--color-brand-gold-light);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.3s;
+  }
+  
+  .feature-card:hover .icon-box {
+    background-color: var(--color-brand-gold);
+  }
+  
+  /* Icon (SVG) */
+  .icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-brand-orange);
+    transition: color 0.3s;
+  }
+  
+  .feature-card:hover .icon {
+    color: var(--color-brand-navy);
+  }
+  
+  /* Feature Badge */
+  .feature-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .feature-badge-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-brand-orange);
+  }
+}
+

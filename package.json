@@ -1,0 +1,19 @@
+{
+  "name": "bridgescale-website",
+  "version": "1.0.0",
+  "description": "BridgeScale Advisors Corporate Capital Solutions Website",
+  "type": "module",
+  "scripts": {
+    "dev": "./tailwindcss -i ./input.css -o ./output.css --watch",
+    "build": "./tailwindcss -i ./input.css -o ./output.css --minify",
+    "build:prod": "NODE_ENV=production ./tailwindcss -i ./input.css -o ./output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  },
+  "keywords": [
+    "tailwindcss",
+    "website",
+    "business"
+  ]
+}
