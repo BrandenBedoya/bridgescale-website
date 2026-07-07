@@ -88,6 +88,21 @@ footer a:hover{color:var(--gold-lt)}
 .next-stage{display:flex;justify-content:space-between;align-items:center;background:var(--white);border:1px solid var(--line);border-left:4px solid var(--gold);padding:22px 24px;margin-top:48px;text-decoration:none}
 .next-stage .mono{color:var(--gold)}
 .next-stage b{font-family:'Zilla Slab',serif;font-size:20px}
+/* hamburger */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;color:var(--white);flex-direction:column;gap:5px;align-self:center}
+.hamburger span{display:block;width:24px;height:2px;background:currentColor;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 @media(max-width:900px){.grid4{grid-template-columns:1fr 1fr}.door-track{grid-template-columns:1fr 1fr;border-bottom:none}.door{border-bottom:1px solid rgba(255,255,255,.2)}.door:nth-child(2n){border-right:none}.twocol{grid-template-columns:1fr}.sidebox{position:static}footer .cols{grid-template-columns:1fr}}
+@media(max-width:720px){
+  .hamburger{display:flex}
+  .nav{flex-wrap:nowrap;position:relative;align-items:center}
+  .nav-links{display:none;flex-direction:column;align-items:flex-start;gap:0;position:absolute;top:calc(100% + 14px);left:-24px;right:-24px;background:var(--deep);padding:8px 0 16px;border-top:2px solid var(--gold);z-index:100;width:calc(100% + 48px)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 24px;width:100%;font-size:14px;opacity:.9;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.04em}
+  .nav-links a:last-child{border-bottom:none}
+  .nav-links .btn{margin:12px 24px 0;width:calc(100% - 48px);text-align:center;padding:12px;display:block}
+}
 @media(max-width:640px){.grid2,.grid4{grid-template-columns:1fr}.hero{padding:56px 0 48px}section{padding:52px 0}}
 @media(prefers-reduced-motion:no-preference){.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}.reveal.in{opacity:1;transform:none}}
