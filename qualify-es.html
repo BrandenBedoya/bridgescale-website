@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Cuatro preguntas rápidas para saber si BridgeScale Advisors es la opción adecuada para su negocio de contratista.">
+<title>¿Califica Usted? — BridgeScale Advisors</title>
+<style>
+:root{--navy:#1B2A4A;--gold:#B89630;--bg:#F7F6F2;--ink:#1a1a1a;--muted:#5a6273;--line:#e2ddd2}
+html{color-scheme:light only}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+.bsq-bar-wrap,.bsi-bar-wrap{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.bsi-bar-wrap{position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5}
+.bsq-bar-track,.bsi-bar-track{flex:1;height:8px;background:#e9e5da;border-radius:99px;overflow:hidden}
+.bsq-bar-fill,.bsi-bar-fill{height:100%;background:var(--gold);border-radius:99px;transition:width .3s ease;width:0}
+.bsq-bar-label,.bsi-bar-label{font-size:12px;font-weight:bold;color:var(--navy);min-width:96px;text-align:right}
+.bs-wrap{max-width:720px;margin:0 auto;padding:32px 20px 64px}
+.bs-brand{color:var(--navy);font-weight:bold;letter-spacing:.04em;font-size:14px;text-transform:uppercase}
+.bs-tag{color:var(--gold);font-size:12px;margin-bottom:24px}
+/* qualifier */
+.bsq-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;box-shadow:0 2px 10px rgba(27,42,74,.06)}
+.bsq-progress{font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.bsq-title{margin:0 0 4px;color:var(--navy);font-size:22px}
+.bsq-subtitle{margin:0 0 16px;color:var(--muted);font-size:14px}
+.bsq-question{font-size:17px;font-weight:bold;color:var(--navy);margin:12px 0 16px}
+.bsq-options{display:grid;gap:10px}
+.bsq-option{display:block;width:100%;text-align:left;padding:14px 16px;font-size:15px;background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:8px;cursor:pointer;transition:border-color .15s,background .15s;font-family:inherit}
+.bsq-option:hover{border-color:var(--gold);background:#fdfaf2}
+.bsq-selected{border-color:var(--navy);background:#f0f3fa}
+.bsq-back{margin-top:16px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;text-decoration:underline;font-family:inherit}
+.bsq-result-heading{color:var(--navy);font-size:22px;margin:0 0 8px}
+.bsq-result-body{color:var(--ink);font-size:15px;line-height:1.55}
+.bsq-cta{display:inline-block;margin-top:12px;background:var(--gold);color:#fff;padding:13px 26px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:15px}
+.bsq-cta:hover{background:#a58527}
+.bsq-alt-link{display:block;margin-top:12px;color:var(--navy);font-size:13px}
+.bsq-disclaimer{margin-top:20px;font-size:11px;color:var(--muted);line-height:1.5}
+/* intake */
+.bsi-title{color:var(--navy);font-size:26px;margin:0 0 6px}
+.bsi-subtitle{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 24px}
+.bsi-form{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;box-shadow:0 2px 10px rgba(27,42,74,.06)}
+.bsi-section{border:none;border-top:2px solid var(--line);margin:0 0 8px;padding:18px 0 6px}
+.bsi-section:first-child{border-top:none;padding-top:0}
+.bsi-legend{color:var(--gold);font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:0 0 6px}
+.bsi-intro{font-size:13px;color:var(--muted);margin:0 0 10px}
+.bsi-field{margin-bottom:16px}
+.bsi-label{display:block;font-size:14px;font-weight:bold;color:var(--navy);margin-bottom:6px}
+.bsi-input{width:100%;padding:11px 12px;font-size:15px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;background:#fff;color:var(--ink)}
+.bsi-input:focus{outline:none;border-color:var(--gold)}
+.bsi-group{display:grid;gap:6px}
+.bsi-choice{font-size:14px;display:flex;align-items:flex-start;gap:8px;line-height:1.45;font-weight:normal;color:var(--ink)}
+.bsi-choice input{margin-top:2px;accent-color:#1B2A4A}
+.bsi-missing{background:#fdf3f3;border-left:3px solid #c0392b;padding-left:10px;border-radius:4px}
+.bsi-status{font-size:13px;color:var(--muted);min-height:18px}
+.bsi-error{color:#c0392b;font-weight:bold}
+.bsi-submit{background:var(--gold);color:#fff;border:none;padding:14px 30px;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;font-family:inherit}
+.bsi-submit:hover{background:#a58527}
+.bsi-mailto{display:block;margin-top:12px;font-size:12px;color:var(--muted)}
+.bsi-sent{color:var(--navy);font-size:17px;font-weight:bold}
+.bsi-disclaimer{margin-top:20px;font-size:11px;color:var(--muted);line-height:1.5}
+@media(max-width:480px){.bsq-card,.bsi-form{padding:18px}}
+</style>
+</head>
+<body>
+<div class="bs-wrap">
+  <a href="espanol.html" style="text-decoration:none"><div class="bs-brand">BridgeScale Advisors</div></a>
+  <div class="bs-tag">Bid Bigger. Bond Faster. Build Without Limits.</div>
+  <div id="bs-qualify"></div>
+</div>
+<script>
+"use strict";
+/**
+ * BridgeScale Advisors — Calificador de 4 preguntas (versión en español)
+ * Registro: usted. Vocabulario alineado con espanol.html / contact-es.html.
+ * PENDIENTE: revisión de localización por Branden.
+ */
+const STRINGS = {
+    title: "¿Es BridgeScale la opción adecuada para su negocio?",
+    subtitle: "Cuatro preguntas rápidas. No se requiere correo electrónico. Toma 30 segundos.",
+    back: "Atrás",
+    qualifiedHeading: "Usted parece ser un excelente candidato.",
+    qualifiedBody: "Según sus respuestas, el siguiente paso correcto es una Evaluación de Preparación para Contratistas — gratuita, de 30 minutos. Identificaremos cuál de las cinco puertas — crédito, crédito empresarial, capital, fianza, preparación para contratos — lo está bloqueando.",
+    qualifiedCta: "Reservar Mi Evaluación Gratuita",
+    notYetHeading: "Construyamos su base primero.",
+    notYetBody: "Es posible que todavía no necesite una asesoría completa — y no se la vamos a vender. Comience con la Etapa 1 (base de crédito personal), o reserve una llamada de todos modos y le orientaremos sin costo.",
+    notYetCta: "Comenzar con la Etapa 1",
+    disclaimer: "Esta herramienta ofrece únicamente una indicación preliminar. No se garantiza ningún resultado específico de crédito, financiamiento, fianza o contrato.",
+    stepOf: (c, t) => `Pregunta ${c} de ${t}`,
+    pctComplete: (pct) => `${pct}% completado`,
+};
+const QUESTIONS = [
+    {
+        id: "revenue",
+        text: "¿Cuál es el ingreso anual aproximado de su negocio?",
+        options: [
+            { label: "Menos de $500K", points: 1 },
+            { label: "$500K – $2M", points: 3 },
+            { label: "$2M – $25M", points: 3 },
+            { label: "Todavía no tengo negocio", points: 0 },
+        ],
+    },
+    {
+        id: "blocker",
+        text: "¿Qué es lo que más está frenando su negocio en este momento?",
+        options: [
+            { label: "La capacidad de fianza limita lo que puedo licitar", points: 3 },
+            { label: "Me negaron financiamiento o una línea de crédito", points: 3 },
+            { label: "Problemas de crédito personal o empresarial", points: 2 },
+            { label: "Quiero contratos de gobierno pero no sé por dónde empezar", points: 2 },
+        ],
+    },
+    {
+        id: "timeline",
+        text: "¿Cuándo necesita estar listo para licitar o solicitar financiamiento?",
+        options: [
+            { label: "Estoy licitando / solicitando ahora mismo", points: 3 },
+            { label: "Dentro de los próximos 90 días", points: 3 },
+            { label: "Dentro de 6 a 12 meses", points: 2 },
+            { label: "Solo estoy explorando", points: 1 },
+        ],
+    },
+    {
+        id: "experience",
+        text: "¿Cuánto tiempo lleva operando en su oficio?",
+        options: [
+            { label: "Más de 3 años", points: 3 },
+            { label: "1 a 3 años", points: 2 },
+            { label: "Menos de 1 año", points: 1 },
+            { label: "No soy contratista (otro tipo de negocio)", points: 1 },
+        ],
+    },
+];
+/** Puntaje igual o mayor → calificado. Máximo = 12. */
+const QUALIFY_THRESHOLD = 8;
+const BOOKING_URL = "contact-es.html";
+const STAGE1_URL = "stage-1-es.html";
+class QualifyWidget {
+    constructor(rootId) {
+        this.step = 0;
+        this.answers = [];
+        const el = document.getElementById(rootId);
+        if (!el)
+            throw new Error(`#${rootId} not found`);
+        this.root = el;
+        this.render();
+    }
+    score() {
+        return this.answers.reduce((a, b) => a + b, 0);
+    }
+    progressBar() {
+        const pct = Math.round((Math.min(this.step, QUESTIONS.length) / QUESTIONS.length) * 100);
+        const wrap = div("bsq-bar-wrap");
+        const track = div("bsq-bar-track");
+        const fill = div("bsq-bar-fill");
+        fill.style.width = pct + "%";
+        track.appendChild(fill);
+        wrap.appendChild(track);
+        wrap.appendChild(el("span", "bsq-bar-label", STRINGS.pctComplete(pct)));
+        return wrap;
+    }
+    render() {
+        this.root.innerHTML = "";
+        const card = div("bsq-card");
+        card.appendChild(this.progressBar());
+        if (this.step < QUESTIONS.length) {
+            const q = QUESTIONS[this.step];
+            card.appendChild(el("div", "bsq-progress", STRINGS.stepOf(this.step + 1, QUESTIONS.length)));
+            if (this.step === 0) {
+                card.appendChild(el("h3", "bsq-title", STRINGS.title));
+                card.appendChild(el("p", "bsq-subtitle", STRINGS.subtitle));
+            }
+            card.appendChild(el("p", "bsq-question", q.text));
+            const list = div("bsq-options");
+            q.options.forEach((opt) => {
+                const btn = el("button", "bsq-option", opt.label);
+                btn.type = "button";
+                btn.addEventListener("click", () => {
+                    this.answers[this.step] = opt.points;
+                    this.step++;
+                    this.render();
+                });
+                list.appendChild(btn);
+            });
+            card.appendChild(list);
+            if (this.step > 0) {
+                const back = el("button", "bsq-back", STRINGS.back);
+                back.type = "button";
+                back.addEventListener("click", () => {
+                    this.step--;
+                    this.render();
+                });
+                card.appendChild(back);
+            }
+        }
+        else {
+            const qualified = this.score() >= QUALIFY_THRESHOLD;
+            card.appendChild(el("h3", "bsq-result-heading", qualified ? STRINGS.qualifiedHeading : STRINGS.notYetHeading));
+            card.appendChild(el("p", "bsq-result-body", qualified ? STRINGS.qualifiedBody : STRINGS.notYetBody));
+            const cta = el("a", "bsq-cta", qualified ? STRINGS.qualifiedCta : STRINGS.notYetCta);
+            cta.href = qualified ? BOOKING_URL : STAGE1_URL;
+            card.appendChild(cta);
+            if (!qualified) {
+                const alt = el("a", "bsq-alt-link", STRINGS.qualifiedCta);
+                alt.href = BOOKING_URL;
+                card.appendChild(alt);
+            }
+            card.appendChild(el("p", "bsq-disclaimer", STRINGS.disclaimer));
+        }
+        this.root.appendChild(card);
+    }
+}
+function el(tag, cls, text) {
+    const e = document.createElement(tag);
+    e.className = cls;
+    if (text !== undefined)
+        e.textContent = text;
+    return e;
+}
+function div(cls) {
+    return el("div", cls);
+}
+document.addEventListener("DOMContentLoaded", () => new QualifyWidget("bs-qualify"));
+
+</script>
+</body>
+</html>
