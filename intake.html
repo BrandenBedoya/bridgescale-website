@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Pre-call intake questionnaire for BridgeScale Advisors clients.">
+<title>Contractor Readiness Intake — BridgeScale Advisors</title>
+<style>
+:root{--navy:#1B2A4A;--gold:#B89630;--bg:#F7F6F2;--ink:#1a1a1a;--muted:#5a6273;--line:#e2ddd2}
+html{color-scheme:light only}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+.bsq-bar-wrap,.bsi-bar-wrap{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.bsi-bar-wrap{position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5}
+.bsq-bar-track,.bsi-bar-track{flex:1;height:8px;background:#e9e5da;border-radius:99px;overflow:hidden}
+.bsq-bar-fill,.bsi-bar-fill{height:100%;background:var(--gold);border-radius:99px;transition:width .3s ease;width:0}
+.bsq-bar-label,.bsi-bar-label{font-size:12px;font-weight:bold;color:var(--navy);min-width:96px;text-align:right}
+.bs-wrap{max-width:720px;margin:0 auto;padding:32px 20px 64px}
+.bs-brand{color:var(--navy);font-weight:bold;letter-spacing:.04em;font-size:14px;text-transform:uppercase}
+.bs-tag{color:var(--gold);font-size:12px;margin-bottom:24px}
+/* qualifier */
+.bsq-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;box-shadow:0 2px 10px rgba(27,42,74,.06)}
+.bsq-progress{font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.bsq-title{margin:0 0 4px;color:var(--navy);font-size:22px}
+.bsq-subtitle{margin:0 0 16px;color:var(--muted);font-size:14px}
+.bsq-question{font-size:17px;font-weight:bold;color:var(--navy);margin:12px 0 16px}
+.bsq-options{display:grid;gap:10px}
+.bsq-option{display:block;width:100%;text-align:left;padding:14px 16px;font-size:15px;background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:8px;cursor:pointer;transition:border-color .15s,background .15s;font-family:inherit}
+.bsq-option:hover{border-color:var(--gold);background:#fdfaf2}
+.bsq-selected{border-color:var(--navy);background:#f0f3fa}
+.bsq-back{margin-top:16px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;text-decoration:underline;font-family:inherit}
+.bsq-result-heading{color:var(--navy);font-size:22px;margin:0 0 8px}
+.bsq-result-body{color:var(--ink);font-size:15px;line-height:1.55}
+.bsq-cta{display:inline-block;margin-top:12px;background:var(--gold);color:#fff;padding:13px 26px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:15px}
+.bsq-cta:hover{background:#a58527}
+.bsq-alt-link{display:block;margin-top:12px;color:var(--navy);font-size:13px}
+.bsq-disclaimer{margin-top:20px;font-size:11px;color:var(--muted);line-height:1.5}
+/* intake */
+.bsi-title{color:var(--navy);font-size:26px;margin:0 0 6px}
+.bsi-subtitle{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 24px}
+.bsi-form{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;box-shadow:0 2px 10px rgba(27,42,74,.06)}
+.bsi-section{border:none;border-top:2px solid var(--line);margin:0 0 8px;padding:18px 0 6px}
+.bsi-section:first-child{border-top:none;padding-top:0}
+.bsi-legend{color:var(--gold);font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:0 0 6px}
+.bsi-intro{font-size:13px;color:var(--muted);margin:0 0 10px}
+.bsi-field{margin-bottom:16px}
+.bsi-label{display:block;font-size:14px;font-weight:bold;color:var(--navy);margin-bottom:6px}
+.bsi-input{width:100%;padding:11px 12px;font-size:15px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;background:#fff;color:var(--ink)}
+.bsi-input:focus{outline:none;border-color:var(--gold)}
+.bsi-group{display:grid;gap:6px}
+.bsi-choice{font-size:14px;display:flex;align-items:flex-start;gap:8px;line-height:1.45;font-weight:normal;color:var(--ink)}
+.bsi-choice input{margin-top:2px;accent-color:#1B2A4A}
+.bsi-missing{background:#fdf3f3;border-left:3px solid #c0392b;padding-left:10px;border-radius:4px}
+.bsi-status{font-size:13px;color:var(--muted);min-height:18px}
+.bsi-error{color:#c0392b;font-weight:bold}
+.bsi-submit{background:var(--gold);color:#fff;border:none;padding:14px 30px;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;font-family:inherit}
+.bsi-submit:hover{background:#a58527}
+.bsi-mailto{display:block;margin-top:12px;font-size:12px;color:var(--muted)}
+.bsi-sent{color:var(--navy);font-size:17px;font-weight:bold}
+.bsi-disclaimer{margin-top:20px;font-size:11px;color:var(--muted);line-height:1.5}
+@media(max-width:480px){.bsq-card,.bsi-form{padding:18px}}
+</style>
+</head>
+<body>
+<div class="bs-wrap">
+  <a href="index.html" style="text-decoration:none"><div class="bs-brand">BridgeScale Advisors</div></a>
+  <div class="bs-tag">Bid Bigger. Bond Faster. Build Without Limits.</div>
+  <div id="bs-intake"></div>
+</div>
+<script>
+"use strict";
+/**
+ * BridgeScale Advisors — Contractor Readiness Intake (pre-call questionnaire)
+ * Renders into <div id="bs-intake"></div>. No dependencies.
+ * Submission: POSTs to FormSubmit (delivers to josh@bridgescaleadvisors.com) with
+ * a mailto: fallback if the endpoint is unreachable. Answers autosave to
+ * localStorage so prospects can finish later.
+ * All copy lives in config objects for Branden's manual ES localization.
+ */
+const SUBMIT_ENDPOINT = "https://formsubmit.co/josh@bridgescaleadvisors.com";
+const FALLBACK_EMAIL = "josh@bridgescaleadvisors.com";
+const STORAGE_KEY = "bridgescale_intake_v1";
+const UI = {
+    title: "Contractor Readiness Intake",
+    subtitle: "Completing this before your call lets us spend the full 30 minutes on strategy instead of data-gathering. It takes about 8–10 minutes, and your answers save on this device as you go.",
+    required: "required",
+    submit: "Submit My Intake",
+    saved: "Progress saved on this device.",
+    missing: "Please complete the highlighted required fields.",
+    sent: "Thank you — your intake has been received. We'll review it before your call.",
+    mailtoNote: "If the submit button doesn't work on your network, click here to send your answers by email instead.",
+    pctComplete: (pct) => `${pct}% completed`,
+    disclaimer: "BridgeScale Advisors is a business advisory firm. We are not a lender, bank, law firm, accounting firm, or licensed insurance producer. No specific credit, funding, bonding, or contract outcome is guaranteed. Consumers may dispute inaccurate information directly with the credit bureaus at no cost.",
+};
+const SECTIONS = [
+    {
+        title: "1 · Contact",
+        fields: [
+            { id: "full_name", label: "Full name", type: "text", required: true },
+            { id: "email", label: "Email", type: "email", required: true },
+            { id: "phone", label: "Phone", type: "tel", required: true },
+            { id: "language", label: "Preferred language", type: "radio", required: true, options: ["English", "Español"] },
+            { id: "state", label: "State where you operate", type: "text", required: true },
+        ],
+    },
+    {
+        title: "2 · Business Profile",
+        fields: [
+            { id: "biz_name", label: "Business legal name", type: "text", required: true },
+            { id: "entity_type", label: "Entity type", type: "select", required: true, options: ["LLC", "Corporation (Inc.)", "Sole proprietor", "Partnership", "Not formed yet", "Other"] },
+            { id: "has_ein", label: "Do you have an EIN?", type: "radio", required: true, options: ["Yes", "No", "Not sure"] },
+            { id: "years", label: "Years in business", type: "select", required: true, options: ["Under 1", "1–3", "3–5", "5–10", "10+"] },
+            { id: "trade", label: "Primary trade / specialty", type: "text", required: true, placeholder: "e.g., electrical, roofing, GC, HVAC" },
+            { id: "licensed", label: "Licensed in your trade?", type: "radio", options: ["Yes", "No", "Not required for my trade"] },
+            { id: "revenue", label: "Annual revenue (approx.)", type: "select", required: true, options: ["Under $500K", "$500K–$1M", "$1M–$5M", "$5M–$25M", "Over $25M"] },
+            { id: "crew", label: "Number of employees / crew size", type: "text" },
+        ],
+    },
+    {
+        title: "3 · Goals",
+        fields: [
+            { id: "goal", label: "What does success look like 12 months from now?", type: "textarea", required: true },
+            { id: "target_size", label: "Target contract size you want to bid", type: "select", options: ["Under $100K", "$100K–$500K", "$500K–$2M", "$2M+", "Not sure"] },
+            { id: "gov_interest", label: "Interested in government / public work?", type: "radio", options: ["Yes — federal", "Yes — state/local", "Yes — both", "Not right now"] },
+        ],
+    },
+    {
+        title: "4 · Personal Credit",
+        intro: "Honest answers help us prepare — nothing here disqualifies you.",
+        fields: [
+            { id: "fico", label: "Approximate personal credit score", type: "select", required: true, options: ["Below 580", "580–619", "620–679", "680–739", "740+", "Don't know"] },
+            { id: "credit_issues", label: "Any of these on your credit file? (check all that apply)", type: "checkboxes", options: ["Collections", "Charge-offs", "Late payments", "Bankruptcy", "Tax lien / judgment", "High utilization", "Too many inquiries", "None / not sure"] },
+            { id: "prior_repair", label: "Worked with a credit repair company before?", type: "radio", options: ["Yes", "No"] },
+        ],
+    },
+    {
+        title: "5 · Business Credit",
+        fields: [
+            { id: "duns", label: "Does your business have a DUNS number?", type: "radio", options: ["Yes", "No", "Not sure"] },
+            { id: "tradelines", label: "Active vendor / trade accounts reporting", type: "select", options: ["None", "1–2", "3–5", "5+", "Not sure"] },
+            { id: "biz_bank", label: "Business bank account in the business name?", type: "radio", options: ["Yes", "No"] },
+        ],
+    },
+    {
+        title: "6 · Funding History",
+        fields: [
+            { id: "capital_need", label: "How much capital do you need in the next 12 months?", type: "select", options: ["None right now", "Under $50K", "$50K–$150K", "$150K–$500K", "$500K+"] },
+            { id: "declines", label: "Declined for funding in the last 12 months?", type: "radio", options: ["Yes", "No"] },
+            { id: "decline_reason", label: "If yes — what reason were you given?", type: "text" },
+            { id: "current_debt", label: "Current business debt (loans, MCAs, lines)", type: "textarea", placeholder: "Type, approximate balance, payment" },
+        ],
+    },
+    {
+        title: "7 · Bonding & Government Readiness",
+        fields: [
+            { id: "bonded", label: "Have you been bonded before?", type: "radio", options: ["Yes — currently bonded", "Yes — in the past", "No — was declined", "No — never applied"] },
+            { id: "bond_limits", label: "If bonded: current single / aggregate limits", type: "text", placeholder: "e.g., $500K single / $1M aggregate" },
+            { id: "sam", label: "Registered in SAM.gov?", type: "radio", options: ["Yes — active", "Yes — expired", "No", "Not sure"] },
+            { id: "certs", label: "Certifications held (check all that apply)", type: "checkboxes", options: ["8(a)", "WOSB / EDWOSB", "SDVOSB / VOSB", "HUBZone", "DBE / MBE", "State/local SBE", "None"] },
+            { id: "past_perf", label: "Completed public (government) projects before?", type: "radio", options: ["Yes — as a prime", "Yes — as a sub", "No"] },
+        ],
+    },
+    {
+        title: "8 · Consent",
+        fields: [
+            { id: "consent_contact", label: "I agree that BridgeScale Advisors may contact me by phone, email, or text about my inquiry. Message and data rates may apply; I can opt out of texts by replying STOP.", type: "checkboxes", required: true, options: ["I agree"] },
+            { id: "consent_accuracy", label: "The information I've provided is accurate to the best of my knowledge.", type: "checkboxes", required: true, options: ["I confirm"] },
+        ],
+    },
+];
+class IntakeForm {
+    constructor(rootId) {
+        const elRoot = document.getElementById(rootId);
+        if (!elRoot)
+            throw new Error(`#${rootId} not found`);
+        this.root = elRoot;
+        this.form = document.createElement("form");
+        this.build();
+        this.restore();
+        this.updateProgress();
+        this.form.addEventListener("input", () => {
+            this.save();
+            this.updateProgress();
+        });
+        this.form.addEventListener("submit", (e) => this.submit(e));
+    }
+    build() {
+        this.root.appendChild(mk("h2", "bsi-title", UI.title));
+        this.root.appendChild(mk("p", "bsi-subtitle", UI.subtitle));
+        const barWrap = mk("div", "bsi-bar-wrap");
+        const track = mk("div", "bsi-bar-track");
+        const fill = mk("div", "bsi-bar-fill");
+        fill.id = "bsi-bar-fill";
+        track.appendChild(fill);
+        barWrap.appendChild(track);
+        const barLabel = mk("span", "bsi-bar-label", UI.pctComplete(0));
+        barLabel.id = "bsi-bar-label";
+        barWrap.appendChild(barLabel);
+        this.root.appendChild(barWrap);
+        this.form.className = "bsi-form";
+        this.form.setAttribute("novalidate", "true");
+        for (const s of SECTIONS) {
+            const sec = mk("fieldset", "bsi-section");
+            sec.appendChild(mk("legend", "bsi-legend", s.title));
+            if (s.intro)
+                sec.appendChild(mk("p", "bsi-intro", s.intro));
+            for (const f of s.fields)
+                sec.appendChild(this.field(f));
+            this.form.appendChild(sec);
+        }
+        const status = mk("p", "bsi-status", "");
+        status.id = "bsi-status";
+        this.form.appendChild(status);
+        const btn = mk("button", "bsi-submit", UI.submit);
+        btn.type = "submit";
+        this.form.appendChild(btn);
+        const mailto = mk("a", "bsi-mailto", UI.mailtoNote);
+        mailto.href = "#";
+        mailto.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.location.href = this.mailtoUrl();
+        });
+        this.form.appendChild(mailto);
+        this.form.appendChild(mk("p", "bsi-disclaimer", UI.disclaimer));
+        this.root.appendChild(this.form);
+    }
+    field(f) {
+        const wrap = mk("div", "bsi-field");
+        wrap.dataset.fieldId = f.id;
+        const lab = mk("label", "bsi-label", f.label + (f.required ? " *" : ""));
+        lab.setAttribute("for", f.id);
+        wrap.appendChild(lab);
+        if (f.type === "select") {
+            const sel = document.createElement("select");
+            sel.name = f.id;
+            sel.id = f.id;
+            sel.className = "bsi-input";
+            sel.appendChild(new Option("— select —", ""));
+            (f.options || []).forEach((o) => sel.appendChild(new Option(o, o)));
+            wrap.appendChild(sel);
+        }
+        else if (f.type === "radio" || f.type === "checkboxes") {
+            const group = mk("div", "bsi-group");
+            (f.options || []).forEach((o, i) => {
+                const id = `${f.id}_${i}`;
+                const item = mk("label", "bsi-choice");
+                const input = document.createElement("input");
+                input.type = f.type === "radio" ? "radio" : "checkbox";
+                input.name = f.id;
+                input.value = o;
+                input.id = id;
+                item.appendChild(input);
+                item.appendChild(document.createTextNode(" " + o));
+                group.appendChild(item);
+            });
+            wrap.appendChild(group);
+        }
+        else if (f.type === "textarea") {
+            const ta = document.createElement("textarea");
+            ta.name = f.id;
+            ta.id = f.id;
+            ta.rows = 3;
+            ta.className = "bsi-input";
+            if (f.placeholder)
+                ta.placeholder = f.placeholder;
+            wrap.appendChild(ta);
+        }
+        else {
+            const input = document.createElement("input");
+            input.type = f.type;
+            input.name = f.id;
+            input.id = f.id;
+            input.className = "bsi-input";
+            if (f.placeholder)
+                input.placeholder = f.placeholder;
+            wrap.appendChild(input);
+        }
+        return wrap;
+    }
+    collect() {
+        const data = {};
+        const fd = new FormData(this.form);
+        for (const s of SECTIONS)
+            for (const f of s.fields) {
+                const vals = fd.getAll(f.id).map(String).filter((v) => v !== "");
+                data[f.id] = vals.join("; ");
+            }
+        return data;
+    }
+    validate(data) {
+        const missing = [];
+        for (const s of SECTIONS)
+            for (const f of s.fields)
+                if (f.required && !data[f.id])
+                    missing.push(f.id);
+        return missing;
+    }
+    save() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(this.collect()));
+            this.status(UI.saved, false);
+        }
+        catch { /* private mode — ignore */ }
+    }
+    restore() {
+        let saved = {};
+        try {
+            saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+        }
+        catch {
+            return;
+        }
+        for (const [id, value] of Object.entries(saved)) {
+            if (!value)
+                continue;
+            const inputs = this.form.querySelectorAll(`[name="${id}"]`);
+            if (inputs.length === 0)
+                continue;
+            const first = inputs[0];
+            if (first.type === "radio" || first.type === "checkbox") {
+                const vals = value.split("; ");
+                inputs.forEach((i) => { i.checked = vals.includes(i.value); });
+            }
+            else {
+                first.value = value;
+            }
+        }
+    }
+    mailtoUrl() {
+        const data = this.collect();
+        const lines = SECTIONS.flatMap((s) => [
+            `--- ${s.title} ---`,
+            ...s.fields.map((f) => `${f.label}: ${data[f.id] || "(blank)"}`),
+        ]);
+        const body = encodeURIComponent(lines.join("\n"));
+        return `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent("Contractor Readiness Intake")}&body=${body}`;
+    }
+    async submit(e) {
+        e.preventDefault();
+        const data = this.collect();
+        const missing = this.validate(data);
+        this.form.querySelectorAll(".bsi-field").forEach((el) => el.classList.remove("bsi-missing"));
+        if (missing.length > 0) {
+            missing.forEach((id) => {
+                const el = this.form.querySelector(`[data-field-id="${id}"]`);
+                if (el)
+                    el.classList.add("bsi-missing");
+            });
+            this.status(UI.missing, true);
+            const firstEl = this.form.querySelector(".bsi-missing");
+            if (firstEl && typeof firstEl.scrollIntoView === "function") {
+                firstEl.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+            return;
+        }
+        try {
+            const payload = new FormData();
+            Object.entries(data).forEach(([k, v]) => payload.append(k, v));
+            payload.append("_subject", "New Contractor Readiness Intake — " + (data["full_name"] || "unknown"));
+            payload.append("_captcha", "false");
+            payload.append("_template", "table");
+            const res = await fetch(SUBMIT_ENDPOINT, { method: "POST", body: payload, headers: { Accept: "application/json" } });
+            if (!res.ok)
+                throw new Error(String(res.status));
+            try {
+                localStorage.removeItem(STORAGE_KEY);
+            }
+            catch { /* ignore */ }
+            this.form.innerHTML = "";
+            this.form.appendChild(mk("p", "bsi-sent", UI.sent));
+        }
+        catch {
+            // Network/endpoint failure → mailto fallback
+            window.location.href = this.mailtoUrl();
+        }
+    }
+    status(msg, isError) {
+        const el = document.getElementById("bsi-status");
+        if (el) {
+            el.textContent = msg;
+            el.className = "bsi-status" + (isError ? " bsi-error" : "");
+        }
+    }
+    /** Progress = answered questions / total questions, updated live as fields are filled. */
+    updateProgress() {
+        const data = this.collect();
+        const total = SECTIONS.reduce((n, s) => n + s.fields.length, 0);
+        const answered = Object.values(data).filter((v) => v !== "").length;
+        const pct = Math.round((answered / total) * 100);
+        const fill = document.getElementById("bsi-bar-fill");
+        const label = document.getElementById("bsi-bar-label");
+        if (fill)
+            fill.style.width = pct + "%";
+        if (label)
+            label.textContent = UI.pctComplete(pct);
+    }
+}
+function mk(tag, cls, text) {
+    const e = document.createElement(tag);
+    e.className = cls;
+    if (text !== undefined)
+        e.textContent = text;
+    return e;
+}
+document.addEventListener("DOMContentLoaded", () => new IntakeForm("bs-intake"));
+
+</script>
+</body>
+</html>
