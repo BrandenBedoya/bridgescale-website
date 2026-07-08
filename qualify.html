@@ -58,7 +58,30 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:
 .bsi-mailto{display:block;margin-top:12px;font-size:12px;color:var(--muted)}
 .bsi-sent{color:var(--navy);font-size:17px;font-weight:bold}
 .bsi-disclaimer{margin-top:20px;font-size:11px;color:var(--muted);line-height:1.5}
-@media(max-width:480px){.bsq-card,.bsi-form{padding:18px}}
+/* checklist */
+.bsc-title{color:var(--navy);font-size:24px;margin:0 0 8px}
+.bsc-subtitle{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 18px}
+.bsc-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:0 2px 10px rgba(27,42,74,.06)}
+.bsc-section-title{color:var(--gold);font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin:18px 0 10px}
+.bsc-section-title:first-child{margin-top:0}
+.bsc-item{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;margin-bottom:8px;cursor:pointer;background:#fff}
+.bsc-item:hover{border-color:var(--gold)}
+.bsc-item input{margin-top:3px;accent-color:#1B2A4A;flex-shrink:0}
+.bsc-item-main{font-size:14px;color:var(--ink);font-weight:bold}
+.bsc-item-cost{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4}
+.bsc-result{margin-top:18px;padding:16px;background:var(--bg);border-radius:8px}
+.bsc-tier{font-size:18px;font-weight:bold;color:var(--navy)}
+.bsc-tier-body{font-size:14px;color:var(--ink);line-height:1.5;margin:6px 0 4px}
+.bsc-capture{margin-top:20px;background:var(--navy);border-radius:12px;padding:24px;color:#fff}
+.bsc-capture-heading{color:#fff;font-size:20px;margin:0 0 6px}
+.bsc-capture-body{color:#cfd5e2;font-size:13px;line-height:1.5;margin:0 0 14px}
+.bsc-capture .bsi-input{margin-bottom:10px}
+.bsc-consent{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#cfd5e2;line-height:1.45;margin-bottom:10px}
+.bsc-consent input{margin-top:2px;accent-color:#B89630}
+.bsc-capture .bsi-status{color:#cfd5e2}
+.bsc-capture .bsi-error{color:#ffb3b3}
+.bsc-capture .bsi-sent{color:#fff}
+@media(max-width:480px){.bsq-card,.bsi-form,.bsc-card,.bsc-capture{padding:18px}}
 </style>
 </head>
 <body>
@@ -85,8 +108,8 @@ const STRINGS = {
     qualifiedBody: "Based on your answers, a free 30-minute Contractor Readiness Assessment is the right next step. We'll map which of the five doors — credit, business credit, capital, bonding, contract readiness — is blocking you.",
     qualifiedCta: "Book My Free Assessment",
     notYetHeading: "Let's build your foundation first.",
-    notYetBody: "You may not need a full advisory engagement yet — and we won't sell you one. Start with Stage 1 (personal credit foundation), or book a call anyway and we'll point you in the right direction at no cost.",
-    notYetCta: "Start With Stage 1",
+    notYetBody: "You may not need a full advisory engagement yet — and we won't sell you one. Start with our free 14-point Credit Readiness Checklist: it shows exactly which gaps are blocking you and the order to close them. Or book a call anyway and we'll point you in the right direction at no cost.",
+    notYetCta: "Get the Free Readiness Checklist",
     disclaimer: "This tool provides a preliminary indication only. No specific credit, funding, bonding, or contract outcome is guaranteed.",
     stepOf: (c, t) => `Question ${c} of ${t}`,
     pctComplete: (pct) => `${pct}% completed`,
@@ -136,7 +159,7 @@ const QUESTIONS = [
 /** Score at or above this → qualified path. Max score = 12. */
 const QUALIFY_THRESHOLD = 8;
 const BOOKING_URL = "contact.html";
-const STAGE1_URL = "stage-1-personal-credit.html";
+const STAGE1_URL = "checklist.html";
 class QualifyWidget {
     constructor(rootId) {
         this.step = 0;

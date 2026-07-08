@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="14 cosas que todo contratista debe tener antes de solicitar una fianza, crédito empresarial o capital gubernamental. Gratis.">
+<title>Lista de Verificación de Crédito para Contratistas — BridgeScale Advisors</title>
+<style>
+:root{--navy:#1B2A4A;--gold:#B89630;--bg:#F7F6F2;--ink:#1a1a1a;--muted:#5a6273;--line:#e2ddd2}
+html{color-scheme:light only}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+.bsq-bar-wrap,.bsi-bar-wrap{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.bsi-bar-wrap{position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5}
+.bsq-bar-track,.bsi-bar-track{flex:1;height:8px;background:#e9e5da;border-radius:99px;overflow:hidden}
+.bsq-bar-fill,.bsi-bar-fill{height:100%;background:var(--gold);border-radius:99px;transition:width .3s ease;width:0}
+.bsq-bar-label,.bsi-bar-label{font-size:12px;font-weight:bold;color:var(--navy);min-width:96px;text-align:right}
+.bs-wrap{max-width:720px;margin:0 auto;padding:32px 20px 64px}
+.bs-brand{color:var(--navy);font-weight:bold;letter-spacing:.04em;font-size:14px;text-transform:uppercase}
+.bs-tag{color:var(--gold);font-size:12px;margin-bottom:24px}
+/* qualifier */
+.bsq-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;box-shadow:0 2px 10px rgba(27,42,74,.06)}
+.bsq-progress{font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.bsq-title{margin:0 0 4px;color:var(--navy);font-size:22px}
+.bsq-subtitle{margin:0 0 16px;color:var(--muted);font-size:14px}
+.bsq-question{font-size:17px;font-weight:bold;color:var(--navy);margin:12px 0 16px}
+.bsq-options{display:grid;gap:10px}
+.bsq-option{display:block;width:100%;text-align:left;padding:14px 16px;font-size:15px;background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:8px;cursor:pointer;transition:border-color .15s,background .15s;font-family:inherit}
+.bsq-option:hover{border-color:var(--gold);background:#fdfaf2}
+.bsq-selected{border-color:var(--navy);background:#f0f3fa}
+.bsq-back{margin-top:16px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;text-decoration:underline;font-family:inherit}
+.bsq-result-heading{color:var(--navy);font-size:22px;margin:0 0 8px}
+.bsq-result-body{color:var(--ink);font-size:15px;line-height:1.55}
+.bsq-cta{display:inline-block;margin-top:12px;background:var(--gold);color:#fff;padding:13px 26px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:15px}
+.bsq-cta:hover{background:#a58527}
+.bsq-alt-link{display:block;margin-top:12px;color:var(--navy);font-size:13px}
+.bsq-disclaimer{margin-top:20px;font-size:11px;color:var(--muted);line-height:1.5}
+/* intake */
+.bsi-title{color:var(--navy);font-size:26px;margin:0 0 6px}
+.bsi-subtitle{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 24px}
+.bsi-form{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;box-shadow:0 2px 10px rgba(27,42,74,.06)}
+.bsi-section{border:none;border-top:2px solid var(--line);margin:0 0 8px;padding:18px 0 6px}
+.bsi-section:first-child{border-top:none;padding-top:0}
+.bsi-legend{color:var(--gold);font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:0 0 6px}
+.bsi-intro{font-size:13px;color:var(--muted);margin:0 0 10px}
+.bsi-field{margin-bottom:16px}
+.bsi-label{display:block;font-size:14px;font-weight:bold;color:var(--navy);margin-bottom:6px}
+.bsi-input{width:100%;padding:11px 12px;font-size:15px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;background:#fff;color:var(--ink)}
+.bsi-input:focus{outline:none;border-color:var(--gold)}
+.bsi-group{display:grid;gap:6px}
+.bsi-choice{font-size:14px;display:flex;align-items:flex-start;gap:8px;line-height:1.45;font-weight:normal;color:var(--ink)}
+.bsi-choice input{margin-top:2px;accent-color:#1B2A4A}
+.bsi-missing{background:#fdf3f3;border-left:3px solid #c0392b;padding-left:10px;border-radius:4px}
+.bsi-status{font-size:13px;color:var(--muted);min-height:18px}
+.bsi-error{color:#c0392b;font-weight:bold}
+.bsi-submit{background:var(--gold);color:#fff;border:none;padding:14px 30px;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;font-family:inherit}
+.bsi-submit:hover{background:#a58527}
+.bsi-mailto{display:block;margin-top:12px;font-size:12px;color:var(--muted)}
+.bsi-sent{color:var(--navy);font-size:17px;font-weight:bold}
+.bsi-disclaimer{margin-top:20px;font-size:11px;color:var(--muted);line-height:1.5}
+/* checklist */
+.bsc-title{color:var(--navy);font-size:24px;margin:0 0 8px}
+.bsc-subtitle{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 18px}
+.bsc-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:0 2px 10px rgba(27,42,74,.06)}
+.bsc-section-title{color:var(--gold);font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin:18px 0 10px}
+.bsc-section-title:first-child{margin-top:0}
+.bsc-item{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;margin-bottom:8px;cursor:pointer;background:#fff}
+.bsc-item:hover{border-color:var(--gold)}
+.bsc-item input{margin-top:3px;accent-color:#1B2A4A;flex-shrink:0}
+.bsc-item-main{font-size:14px;color:var(--ink);font-weight:bold}
+.bsc-item-cost{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4}
+.bsc-result{margin-top:18px;padding:16px;background:var(--bg);border-radius:8px}
+.bsc-tier{font-size:18px;font-weight:bold;color:var(--navy)}
+.bsc-tier-body{font-size:14px;color:var(--ink);line-height:1.5;margin:6px 0 4px}
+.bsc-capture{margin-top:20px;background:var(--navy);border-radius:12px;padding:24px;color:#fff}
+.bsc-capture-heading{color:#fff;font-size:20px;margin:0 0 6px}
+.bsc-capture-body{color:#cfd5e2;font-size:13px;line-height:1.5;margin:0 0 14px}
+.bsc-capture .bsi-input{margin-bottom:10px}
+.bsc-consent{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#cfd5e2;line-height:1.45;margin-bottom:10px}
+.bsc-consent input{margin-top:2px;accent-color:#B89630}
+.bsc-capture .bsi-status{color:#cfd5e2}
+.bsc-capture .bsi-error{color:#ffb3b3}
+.bsc-capture .bsi-sent{color:#fff}
+@media(max-width:480px){.bsq-card,.bsi-form,.bsc-card,.bsc-capture{padding:18px}}
+</style>
+</head>
+<body>
+<div class="bs-wrap">
+  <a href="espanol.html" style="text-decoration:none"><div class="bs-brand">BridgeScale Advisors</div></a>
+  <div class="bs-tag">Bid Bigger. Bond Faster. Build Without Limits.</div>
+  <div id="bs-checklist"></div>
+</div>
+<script>
+"use strict";
+/**
+ * BridgeScale Advisors — Lista de Verificación de Preparación de Crédito (ES)
+ * Registro: usted. PENDIENTE: revisión de localización por Branden.
+ */
+const SUBMIT_ENDPOINT = "https://formsubmit.co/josh@bridgescaleadvisors.com";
+const BOOKING_URL = "contact-es.html";
+const UI = {
+    title: "Lista de Verificación de Crédito y Preparación Gubernamental para Contratistas",
+    subtitle: "14 cosas que todo contratista debe tener antes de solicitar una fianza, crédito empresarial o capital gubernamental. Marque dónde se encuentra hoy — cada casilla sin marcar es una brecha que le está costando contratos, fianzas o acceso a capital.",
+    scoreLabel: (n, t) => `${n} de ${t} marcados`,
+    emailHeading: "Reciba su informe personalizado de brechas",
+    emailBody: "Ingrese su nombre y correo electrónico y le enviaremos un desglose de sus puntos sin marcar — qué le está costando cada brecha y en qué orden cerrarlas. Sin spam, sin compromiso.",
+    namePh: "Su nombre",
+    emailPh: "usted@empresa.com",
+    consent: "Acepto que BridgeScale Advisors se comunique conmigo sobre mis resultados.",
+    send: "Enviar Mi Informe de Brechas",
+    sent: "Su informe va en camino — revise su bandeja de entrada. ¿Quiere avanzar más rápido?",
+    sentCta: "Reservar una Evaluación Gratuita de 30 Minutos",
+    missing: "Por favor agregue su nombre, correo electrónico y consentimiento.",
+    bookCta: "Reservar una Evaluación Gratuita",
+    disclaimer: "BridgeScale Advisors es una firma de asesoría empresarial. No se garantiza ningún resultado específico de crédito, financiamiento, fianza o contrato. Los consumidores pueden disputar información inexacta directamente con las agencias de crédito sin costo.",
+};
+const SECTIONS = [
+    {
+        title: "A · Fundación de la entidad empresarial",
+        items: [
+            { text: "Su negocio está estructurado como LLC o Corporación (no como propietario único)", cost: "El propietario único vincula todas las obligaciones de crédito a su SSN personal — sin separación de entidad" },
+            { text: "Tiene un EIN activo del IRS que coincide exactamente con el nombre legal de su negocio", cost: "Las discrepancias de nombre causan fallas en el reporte de líneas comerciales y rechazos de proveedores" },
+            { text: "Su negocio tiene una dirección física (no un apartado postal ni dirección de casa)", cost: "El apartado postal es rechazado en solicitudes de fianza, cuentas de proveedores y la mayoría de prestamistas" },
+            { text: "Su negocio tiene un número de teléfono dedicado listado en el 411 y en Google", cost: "Un teléfono no verificable activa alertas de fraude — proveedores y aseguradores lo revisan" },
+            { text: "Tiene una cuenta bancaria empresarial a nombre de su compañía con su EIN registrado", cost: "Cuenta personal = sin historial bancario empresarial verificable para prestamistas o afianzadoras" },
+        ],
+    },
+    {
+        title: "B · Perfil de crédito empresarial",
+        items: [
+            { text: "Registró su número D-U-N-S en dnb.com (gratis — toma 1 a 2 semanas)", cost: "Sin D-U-N-S, su puntaje Paydex nunca se activa — todas las compras a proveedores desaparecen" },
+            { text: "Configuró su perfil de Experian Business a través del portal iUpdate", cost: "Los prestamistas de equipos y líneas de crédito consultan Experian Biz — la mayoría de contratistas lo omite" },
+            { text: "Configuró su perfil de Equifax Business a través del portal de Equifax Business", cost: "Las afianzadoras de contratos gubernamentales frecuentemente consultan Equifax Biz — debe existir antes de solicitar" },
+            { text: "Tiene al menos 3 cuentas de proveedores activas reportando a D&B (Paydex activo)", cost: "Se requieren mínimo 3 líneas comerciales para que Paydex se genere — una cuenta no es suficiente" },
+            { text: "Su Nombre, Dirección y Teléfono (NAP) son idénticos en D-U-N-S, Experian, SAM.gov, su sitio web y todas las solicitudes de proveedores", cost: "Cualquier discrepancia causa brechas de reporte — las líneas comerciales no se adjuntan a su perfil" },
+        ],
+    },
+    {
+        title: "C · Requisitos para contratista del gobierno",
+        items: [
+            { text: "Su registro en SAM.gov está activo con un código CAGE válido", cost: "SAM.gov es requerido para TODAS las licitaciones federales — un SAM vencido invalida licitaciones activas" },
+            { text: "Su registro de SAM.gov se renueva anualmente — tiene un recordatorio en su calendario", cost: "SAM vence automáticamente — hay contratistas que pierden contratos activos por no renovar a tiempo" },
+            { text: "Ha sido aprobado para una fianza (o sabe exactamente por qué fue rechazado)", cost: "La mayoría de contratos federales sobre $150K requieren fianzas de la Ley Miller — rechazo = contrato perdido" },
+            { text: "Su FICO personal es 650 o más (la mayoría de afianzadoras lo usa como mínimo)", cost: "Las afianzadoras revisan el crédito personal sin importar la fortaleza del crédito empresarial" },
+        ],
+    },
+];
+const TIERS = [
+    { min: 12, label: "Base sólida", body: "Enfóquese en ampliar niveles de proveedores y capacidad de fianza. Está más cerca de contratos grandes que la mayoría — una llamada de estrategia puede trazar la ruta más rápida." },
+    { min: 8, label: "En construcción", body: "Tiene progreso real, pero las brechas restantes son exactamente las que bloquean fianzas y capital. Ciérrelas en el orden correcto y estará listo para contratos." },
+    { min: 4, label: "Etapa temprana", body: "Un plan estructurado de 90 días cierra la mayoría de estas brechas. El orden importa — algunos puntos desbloquean otros." },
+    { min: 0, label: "Comience aquí", body: "El trabajo de fundación es el único camino hacia fianzas y crédito empresarial — y es más rápido de lo que la mayoría de contratistas espera cuando se hace en secuencia." },
+];
+class ChecklistWidget {
+    constructor(rootId) {
+        this.checked = [];
+        this.total = 0;
+        const el = document.getElementById(rootId);
+        if (!el)
+            throw new Error(`#${rootId} not found`);
+        this.root = el;
+        this.total = SECTIONS.reduce((n, s) => n + s.items.length, 0);
+        this.build();
+    }
+    build() {
+        this.root.appendChild(mk("h1", "bsc-title", UI.title));
+        this.root.appendChild(mk("p", "bsc-subtitle", UI.subtitle));
+        const barWrap = mk("div", "bsi-bar-wrap");
+        const track = mk("div", "bsi-bar-track");
+        const fill = mk("div", "bsi-bar-fill");
+        fill.id = "bsc-bar-fill";
+        track.appendChild(fill);
+        barWrap.appendChild(track);
+        const label = mk("span", "bsi-bar-label", UI.scoreLabel(0, this.total));
+        label.id = "bsc-bar-label";
+        barWrap.appendChild(label);
+        this.root.appendChild(barWrap);
+        const card = mk("div", "bsc-card");
+        let idx = 0;
+        for (const s of SECTIONS) {
+            card.appendChild(mk("div", "bsc-section-title", s.title));
+            for (const item of s.items) {
+                const i = idx++;
+                this.checked[i] = false;
+                const row = mk("label", "bsc-item");
+                const cb = document.createElement("input");
+                cb.type = "checkbox";
+                cb.addEventListener("change", () => {
+                    this.checked[i] = cb.checked;
+                    this.update();
+                });
+                const textWrap = mk("div", "bsc-item-text");
+                textWrap.appendChild(mk("div", "bsc-item-main", item.text));
+                textWrap.appendChild(mk("div", "bsc-item-cost", item.cost));
+                row.appendChild(cb);
+                row.appendChild(textWrap);
+                card.appendChild(row);
+            }
+        }
+        const result = mk("div", "bsc-result");
+        result.id = "bsc-result";
+        card.appendChild(result);
+        this.root.appendChild(card);
+        const capture = mk("div", "bsc-capture");
+        capture.id = "bsc-capture";
+        capture.appendChild(mk("h2", "bsc-capture-heading", UI.emailHeading));
+        capture.appendChild(mk("p", "bsc-capture-body", UI.emailBody));
+        const form = document.createElement("form");
+        form.id = "bsc-form";
+        const name = document.createElement("input");
+        name.type = "text";
+        name.placeholder = UI.namePh;
+        name.className = "bsi-input";
+        name.id = "bsc-name";
+        const email = document.createElement("input");
+        email.type = "email";
+        email.placeholder = UI.emailPh;
+        email.className = "bsi-input";
+        email.id = "bsc-email";
+        const consentRow = mk("label", "bsc-consent");
+        const consent = document.createElement("input");
+        consent.type = "checkbox";
+        consent.id = "bsc-consent";
+        consentRow.appendChild(consent);
+        consentRow.appendChild(document.createTextNode(" " + UI.consent));
+        const status = mk("p", "bsi-status", "");
+        status.id = "bsc-status";
+        const btn = mk("button", "bsi-submit", UI.send);
+        btn.type = "submit";
+        form.appendChild(name);
+        form.appendChild(email);
+        form.appendChild(consentRow);
+        form.appendChild(status);
+        form.appendChild(btn);
+        form.addEventListener("submit", (e) => this.submit(e));
+        capture.appendChild(form);
+        this.root.appendChild(capture);
+        this.root.appendChild(mk("p", "bsi-disclaimer", UI.disclaimer));
+        this.update();
+    }
+    score() {
+        return this.checked.filter(Boolean).length;
+    }
+    tier() {
+        const s = this.score();
+        return TIERS.find((t) => s >= t.min) || TIERS[TIERS.length - 1];
+    }
+    update() {
+        const s = this.score();
+        const pct = Math.round((s / this.total) * 100);
+        const fill = document.getElementById("bsc-bar-fill");
+        const label = document.getElementById("bsc-bar-label");
+        if (fill)
+            fill.style.width = pct + "%";
+        if (label)
+            label.textContent = UI.scoreLabel(s, this.total);
+        const result = document.getElementById("bsc-result");
+        if (result) {
+            const t = this.tier();
+            result.innerHTML = "";
+            result.appendChild(mk("div", "bsc-tier", `${s} / ${this.total} — ${t.label}`));
+            result.appendChild(mk("p", "bsc-tier-body", t.body));
+            const book = mk("a", "bsq-cta", UI.bookCta);
+            book.href = BOOKING_URL;
+            result.appendChild(book);
+        }
+    }
+    gaps() {
+        const out = [];
+        let idx = 0;
+        for (const s of SECTIONS)
+            for (const item of s.items) {
+                if (!this.checked[idx])
+                    out.push(`[${s.title}] ${item.text}`);
+                idx++;
+            }
+        return out;
+    }
+    async submit(e) {
+        e.preventDefault();
+        const name = document.getElementById("bsc-name").value.trim();
+        const email = document.getElementById("bsc-email").value.trim();
+        const consent = document.getElementById("bsc-consent").checked;
+        const status = document.getElementById("bsc-status");
+        if (!name || !email || !consent) {
+            if (status) {
+                status.textContent = UI.missing;
+                status.className = "bsi-status bsi-error";
+            }
+            return;
+        }
+        const payload = new FormData();
+        payload.append("name", name);
+        payload.append("email", email);
+        payload.append("score", `${this.score()} / ${this.total} — ${this.tier().label}`);
+        payload.append("gaps", this.gaps().join("\n") || "Ninguna — los 14 puntos marcados");
+        payload.append("_subject", "Lead de Lista (ES) — " + name + " (" + this.score() + "/" + this.total + ")");
+        payload.append("_captcha", "false");
+        payload.append("_template", "table");
+        try {
+            const res = await fetch(SUBMIT_ENDPOINT, { method: "POST", body: payload, headers: { Accept: "application/json" } });
+            if (!res.ok)
+                throw new Error(String(res.status));
+            const capture = document.getElementById("bsc-capture");
+            if (capture) {
+                capture.innerHTML = "";
+                capture.appendChild(mk("p", "bsi-sent", UI.sent));
+                const cta = mk("a", "bsq-cta", UI.sentCta);
+                cta.href = BOOKING_URL;
+                capture.appendChild(cta);
+            }
+        }
+        catch {
+            const gaps = encodeURIComponent(this.gaps().join("\n"));
+            window.location.href = `mailto:josh@bridgescaleadvisors.com?subject=${encodeURIComponent("Informe de Brechas — " + name)}&body=${encodeURIComponent("Nombre: " + name + "\nCorreo: " + email + "\nPuntaje: " + this.score() + "/" + this.total + "\n\nBrechas:\n")}${gaps}`;
+        }
+    }
+}
+function mk(tag, cls, text) {
+    const e = document.createElement(tag);
+    e.className = cls;
+    if (text !== undefined)
+        e.textContent = text;
+    return e;
+}
+document.addEventListener("DOMContentLoaded", () => new ChecklistWidget("bs-checklist"));
+
+</script>
+</body>
+</html>
