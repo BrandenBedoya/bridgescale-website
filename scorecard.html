@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contractor Capital Readiness Scorecard — Bridgescale Advisors</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #08111f;
+  --navy-mid:   #0f1e35;
+  --navy-light: #1a3055;
+  --gold:       #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-glow:  rgba(201,168,76,0.15);
+  --white:      #f0ece2;
+  --gray:       #7a8faa;
+  --gray-mid:   #3a506b;
+  --red:        #c0392b;
+  --green:      #27ae60;
+  --warn:       #e67e22;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background atmosphere */
+body::before {
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 10%, rgba(201,168,76,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 85% 90%, rgba(26,48,85,0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 30% at 50% 50%, rgba(15,30,53,0.3) 0%, transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+/* Grid texture overlay */
+body::after {
+  content:'';
+  position:fixed;inset:0;
+  background-image: linear-gradient(rgba(201,168,76,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events:none;z-index:0;
+}
+
+.wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  margin-bottom: 52px;
+  animation: fadeDown 0.8s cubic-bezier(.16,1,.3,1) both;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  border-radius: 2px;
+  margin-bottom: 24px;
+}
+.eyebrow::before, .eyebrow::after {
+  content:'';width:20px;height:1px;background:var(--gold-light);opacity:0.4;
+}
+.header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 9vw, 86px);
+  line-height: 0.88;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.header h1 em {
+  color: var(--gold);
+  font-style: normal;
+  display: block;
+}
+.header-sub {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 500px;
+  margin: 0 auto 28px;
+  font-weight: 300;
+}
+.header-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--gray);
+  font-family: 'DM Mono', monospace;
+}
+.stat-dot {
+  width: 6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.6;
+}
+
+/* ── PROGRESS ── */
+.progress-wrap {
+  margin-bottom: 32px;
+  animation: fadeUp 0.6s ease both 0.15s;
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.progress-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.progress-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+}
+.progress-track {
+  height: 3px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold));
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(.16,1,.3,1);
+  width: 0%;
+  box-shadow: 0 0 8px rgba(201,168,76,0.4);
+}
+
+/* ── QUESTION CARD ── */
+.question-card {
+  background: var(--navy-mid);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 4px;
+  padding: 40px 40px 32px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.5s ease both;
+  position: relative;
+  overflow: hidden;
+}
+.question-card::before {
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:0.5;
+}
+.question-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.question-text {
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 10px;
+  color: var(--white);
+}
+.question-sub {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.6;
+  margin-bottom: 28px;
+  font-weight: 300;
+  font-style: italic;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255,255,255,0.02);
+  user-select: none;
+}
+.option:hover {
+  border-color: rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.04);
+}
+.option.selected {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  box-shadow: 0 0 0 1px rgba(201,168,76,0.2);
+}
+.option-radio {
+  width: 18px;height:18px;
+  border-radius:50%;
+  border: 2px solid var(--gray-mid);
+  flex-shrink:0;
+  transition: all 0.2s;
+  position:relative;
+}
+.option.selected .option-radio {
+  border-color: var(--gold);
+  background: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+}
+.option.selected .option-radio::after {
+  content:'';
+  position:absolute;inset:3px;
+  border-radius:50%;background:var(--navy);
+}
+.option-label {
+  font-size: 14px;
+  color: var(--white);
+  line-height: 1.4;
+  font-weight: 400;
+}
+.option.selected .option-label { color: var(--gold-light); font-weight: 500; }
+
+/* flag badges on options */
+.option-flag {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.flag-bad  { background:rgba(192,57,43,0.15); color:#e74c3c; border:1px solid rgba(192,57,43,0.3); }
+.flag-warn { background:rgba(230,126,34,0.15); color:#e67e22; border:1px solid rgba(230,126,34,0.3); }
+.flag-good { background:rgba(39,174,96,0.15);  color:#2ecc71; border:1px solid rgba(39,174,96,0.3); }
+
+/* Multi-select variant — square checkbox instead of round radio */
+.option-radio.option-check {
+  border-radius: 3px;
+}
+.option.selected .option-radio.option-check {
+  border-radius: 3px;
+}
+.option.selected .option-radio.option-check::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--navy);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  background: transparent;
+  inset: auto;
+  border-radius: 0;
+}
+.multi-select-hint {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 10px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+/* ── NAV ── */
+.nav {
+  display: flex;
+  gap: 14px;
+  animation: fadeUp 0.4s ease both 0.1s;
+}
+.btn {
+  padding: 14px 28px;
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+  flex: 1;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--gold-light);
+  box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+  transform: translateY(-1px);
+}
+.btn-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.btn-back {
+  background: transparent;
+  color: var(--gray);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 14px 22px;
+}
+.btn-back:hover { color: var(--white); border-color: rgba(255,255,255,0.25); }
+.btn-back:disabled { opacity: 0.2; cursor: not-allowed; }
+
+/* ── RESULTS ── */
+.results { display: none; animation: fadeUp 0.7s ease both; }
+
+.score-block {
+  background: var(--navy-mid);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 4px;
+  padding: 48px 40px 40px;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.score-block::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.score-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+.score-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 96px;
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 0 40px rgba(201,168,76,0.3);
+}
+.score-denom {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--gray-mid);
+  vertical-align: super;
+}
+.score-tier-label {
+  display: inline-block;
+  margin: 16px auto 12px;
+  padding: 6px 20px;
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+.score-summary-txt {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto 28px;
+  font-weight: 300;
+}
+
+/* Meter */
+.meter-wrap { max-width: 480px; margin: 0 auto; }
+.meter-track {
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.meter-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(.16,1,.3,1);
+  width: 0%;
+}
+.meter-labels {
+  display: flex;
+  justify-content: space-between;
+}
+.meter-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+}
+
+/* ── SCENARIO PANEL ── */
+.section-card {
+  background: var(--navy-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 36px 40px;
+  margin-bottom: 20px;
+}
+.section-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.section-sub {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 300;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* Scenario items */
+.scenario-item {
+  border: 1px solid rgba(192,57,43,0.2);
+  border-left: 3px solid var(--red);
+  border-radius: 3px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  background: rgba(192,57,43,0.04);
+}
+.scenario-item.warn {
+  border-color: rgba(230,126,34,0.2);
+  border-left-color: var(--warn);
+  background: rgba(230,126,34,0.04);
+}
+.scenario-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.scenario-item.warn .scenario-tag { color: var(--warn); }
+.scenario-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.scenario-desc {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.scenario-clear {
+  border: 1px solid rgba(39,174,96,0.2);
+  border-left: 3px solid var(--green);
+  border-radius: 3px;
+  padding: 20px 22px;
+  background: rgba(39,174,96,0.04);
+}
+.scenario-clear-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.scenario-clear p { font-size: 14px; color: var(--gray); font-weight: 300; line-height: 1.6; }
+
+/* ── FLAGS PANEL ── */
+.flags-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+.flag-item {
+  padding: 16px 18px;
+  border-radius: 3px;
+  border: 1px solid;
+}
+.flag-item.green { border-color: rgba(39,174,96,0.25); background: rgba(39,174,96,0.06); }
+.flag-item.red   { border-color: rgba(192,57,43,0.25);  background: rgba(192,57,43,0.06); }
+.flag-item.warn  { border-color: rgba(230,126,34,0.25); background: rgba(230,126,34,0.06); }
+.flag-icon { font-size: 18px; margin-bottom: 6px; }
+.flag-label {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.flag-item.green .flag-label { color: var(--green); }
+.flag-item.red   .flag-label { color: #e74c3c; }
+.flag-item.warn  .flag-label { color: var(--warn); }
+.flag-value { font-size: 13px; color: var(--white); font-weight: 500; }
+.flag-note  { font-size: 11px; color: var(--gray); margin-top: 3px; font-weight: 300; }
+
+/* ── PROGRAM REC ── */
+.program-card {
+  background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 4px;
+  padding: 36px 40px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.program-card::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.program-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.program-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 38px;
+  letter-spacing: 1px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.program-tagline {
+  font-size: 15px;
+  color: var(--gold-light);
+  font-weight: 400;
+  margin-bottom: 22px;
+}
+.program-includes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.prog-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--white);
+  line-height: 1.4;
+}
+.prog-arrow {
+  color: var(--gold);
+  font-size: 13px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+}
+.prog-note {
+  font-size: 11px;
+  color: var(--gray);
+  margin-top: 3px;
+  font-weight: 300;
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  background: var(--navy-mid);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 4px;
+  padding: 48px 40px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.cta-section::after {
+  content:'';position:absolute;bottom:-80px;right:-80px;
+  width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cta-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.cta-section h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  color: var(--white);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.cta-section > p {
+  font-size: 15px;
+  color: var(--gray);
+  max-width: 480px;
+  margin: 0 auto 28px;
+  line-height: 1.75;
+  font-weight: 300;
+}
+.cta-what-happens {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-what-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 3px;
+  padding: 14px 16px;
+  flex: 1;
+  min-width: 140px;
+}
+.cta-what-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.cta-what-text {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.5;
+  font-weight: 300;
+}
+.cta-what-text strong {
+  display: block;
+  color: var(--white);
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 420px;
+  margin: 0 auto 18px;
+}
+.field {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
+  padding: 14px 18px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.field:focus { border-color: var(--gold); }
+.field::placeholder { color: var(--gray); }
+.btn-cta {
+  width: 100%;
+  max-width: 420px;
+  padding: 16px;
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  display: block;
+  margin: 0 auto;
+}
+.btn-cta:hover {
+  background: var(--gold-light);
+  box-shadow: 0 6px 24px rgba(201,168,76,0.35);
+  transform: translateY(-1px);
+}
+.cta-fine {
+  font-size: 11px;
+  color: var(--gray-mid);
+  margin-top: 14px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* ── BOOKING SUCCESS STATE ── */
+.booking-success {
+  display: none;
+  animation: fadeUp 0.6s cubic-bezier(.16,1,.3,1) both;
+}
+.booking-success-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: rgba(26,107,60,0.15);
+  border: 2px solid rgba(39,174,96,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin: 0 auto 20px;
+  animation: popIn 0.4s cubic-bezier(.34,1.56,.64,1) both 0.2s;
+}
+@keyframes popIn {
+  from { opacity:0; transform:scale(0.5); }
+  to   { opacity:1; transform:scale(1); }
+}
+.booking-success-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 38px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.booking-success-msg {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 460px;
+  margin: 0 auto 32px;
+}
+.btn-book-now {
+  display: inline-block;
+  padding: 18px 48px;
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 24px rgba(201,168,76,0.25);
+  animation: pulse-gold 2.5s ease-in-out infinite 1s;
+}
+.btn-book-now:hover {
+  background: var(--gold-light);
+  box-shadow: 0 8px 32px rgba(201,168,76,0.45);
+  transform: translateY(-2px);
+}
+@keyframes pulse-gold {
+  0%,100% { box-shadow: 0 4px 24px rgba(201,168,76,0.25); }
+  50%      { box-shadow: 0 4px 36px rgba(201,168,76,0.5); }
+}
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%,60% { transform: translateX(-4px); }
+  40%,80% { transform: translateX(4px); }
+}
+.booking-note {
+  font-size: 11px;
+  color: var(--gray-mid);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.5px;
+  margin-top: 14px;
+}
+
+/* ── DISCLAIMER BANNER ── */
+.disclaimer-banner {
+  background: rgba(230,126,34,0.08);
+  border: 1px solid rgba(230,126,34,0.2);
+  border-radius: 3px;
+  padding: 16px 22px;
+  margin-bottom: 20px;
+  display: none;
+}
+.disclaimer-banner p {
+  font-size: 13px;
+  color: var(--warn);
+  line-height: 1.6;
+}
+.disclaimer-banner strong { color: var(--gold-light); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown {
+  from { opacity:0; transform:translateY(-24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── BOND IMPACT SECTION ── */
+.bond-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.bond-metric {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 3px;
+  padding: 16px 18px;
+}
+.bond-metric.gold-metric {
+  background: rgba(201,168,76,0.07);
+  border-color: rgba(201,168,76,0.22);
+}
+.bond-metric.green-metric {
+  background: rgba(39,174,96,0.06);
+  border-color: rgba(39,174,96,0.2);
+}
+.bond-metric-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 8px;
+  display: block;
+}
+.bond-metric-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 38px;
+  line-height: 1;
+  color: var(--white);
+}
+.bond-metric-value.gold { color: var(--gold); }
+.bond-metric-value.green { color: var(--green); }
+.bond-metric-sub {
+  font-size: 11px;
+  color: var(--gray);
+  margin-top: 4px;
+  font-weight: 300;
+}
+.bond-savings-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.bond-savings-bar:last-child { border-bottom: none; }
+.bond-tier-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.bond-tier-label {
+  font-size: 13px;
+  color: var(--white);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.bond-bar-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.bond-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s cubic-bezier(.16,1,.3,1);
+}
+.bond-tier-amount {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  min-width: 80px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.bond-roi-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 13px;
+}
+.bond-roi-row:last-child { border-bottom: none; }
+.bond-roi-label { color: var(--gray); font-weight: 300; }
+.bond-roi-value { font-weight: 600; }
+.bond-roi-value.pos { color: var(--green); }
+.bond-roi-value.neg { color: #e74c3c; }
+.bond-roi-value.gold { color: var(--gold); }
+.bond-divider {
+  border: none;
+  border-top: 1px solid rgba(201,168,76,0.12);
+  margin: 18px 0;
+}
+.bond-section-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: block;
+}
+.bond-note {
+  font-size: 11px;
+  color: var(--gray-mid);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.3px;
+  margin-top: 14px;
+  line-height: 1.6;
+}
+.bid-bond-callout {
+  background: rgba(201,168,76,0.05);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-left: 3px solid var(--gold);
+  border-radius: 3px;
+  padding: 16px 18px;
+  margin-top: 16px;
+}
+.bid-bond-callout p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.bid-bond-callout strong { color: var(--gold-light); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .wrap { padding: 28px 16px 80px; }
+  .question-card, .section-card, .program-card, .score-block, .cta-section { padding: 28px 22px; }
+  .flags-grid { grid-template-columns: 1fr; }
+  .bond-grid-2 { grid-template-columns: 1fr; }
+  .nav { flex-direction: column; }
+  .btn-back { order: 2; }
+  .score-num { font-size: 72px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">Bridgescale Advisors · Free Assessment · 4 Minutes</div>
+    <h1>Capital Readiness<em>Scorecard</em></h1>
+    <p class="header-sub">Find out exactly what's blocking you from bonding, funding, and larger contracts — and which program closes the gap fastest.</p>
+    <div class="header-stats">
+      <span class="stat"><span class="stat-dot"></span>20 Questions</span>
+      <span class="stat"><span class="stat-dot"></span>Instant Results</span>
+      <span class="stat"><span class="stat-dot"></span>Personalized Roadmap</span>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label">Your Progress</span>
+        <span class="progress-count" id="progress-count">Question 1 of 14</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="question-card" id="question-card">
+      <div class="question-number" id="q-number">01 / 14</div>
+      <div class="question-text" id="q-text"></div>
+      <div class="question-sub" id="q-sub"></div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-back" id="btn-back" onclick="prevQ()" disabled>← Back</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextQ()" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results" class="results">
+
+    <!-- Disclaimer banner (shown for edge cases) -->
+    <div class="disclaimer-banner" id="disclaimer-banner">
+      <p id="disclaimer-text"></p>
+    </div>
+
+    <!-- Score block -->
+    <div class="score-block">
+      <div class="score-label">Your Capital Readiness Score</div>
+      <div>
+        <span class="score-num" id="score-num">0</span><span class="score-denom">/100</span>
+      </div>
+      <div class="score-tier-label" id="score-tier"></div>
+      <p class="score-summary-txt" id="score-summary"></p>
+      <div class="meter-wrap">
+        <div class="meter-track">
+          <div class="meter-bar" id="meter-bar"></div>
+        </div>
+        <div class="meter-labels">
+          <span class="meter-lbl">Not Ready</span>
+          <span class="meter-lbl">Building</span>
+          <span class="meter-lbl">Ready</span>
+          <span class="meter-lbl">Positioned</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Flags -->
+    <div class="section-card">
+      <h3>Profile Snapshot</h3>
+      <p class="section-sub">Key data points identified from your answers.</p>
+      <div class="flags-grid" id="flags-grid"></div>
+    </div>
+
+    <!-- Scenario Panel -->
+    <div class="section-card">
+      <h3>Blockers Identified</h3>
+      <p class="section-sub">Based on your answers, here are the specific scenarios active in your profile right now.</p>
+      <div id="scenario-list"></div>
+    </div>
+
+    <!-- Program Recommendation -->
+    <div class="program-card" id="program-card">
+      <div class="program-eyebrow">Recommended Program</div>
+      <div class="program-name" id="prog-name"></div>
+      <div class="program-tagline" id="prog-tagline"></div>
+      <div class="program-includes" id="prog-includes"></div>
+    </div>
+
+    <!-- Bond Cost Impact -->
+    <div class="section-card" id="bond-impact-section">
+      <h3>Bond Cost Impact</h3>
+      <p class="section-sub">Based on your credit profile and contract targets — what your bond costs today vs. after Bridgescale. Calculated directly from your answers.</p>
+      <div id="bond-impact-content"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section" id="cta-section">
+
+      <!-- Form state -->
+      <div id="cta-form-state">
+        <div class="cta-eyebrow">Next Step</div>
+        <h3 id="cta-heading">Book Your Strategy Call</h3>
+        <p id="cta-sub">Your scorecard results are ready. Enter your info below — then pick a time directly on our calendar.</p>
+
+        <div class="cta-what-happens">
+          <div class="cta-what-item">
+            <div class="cta-what-icon">📋</div>
+            <div class="cta-what-text">
+              <strong>Review Your Results</strong>
+              We walk through every gap your scorecard identified
+            </div>
+          </div>
+          <div class="cta-what-item">
+            <div class="cta-what-icon">🗺️</div>
+            <div class="cta-what-text">
+              <strong>Build Your Roadmap</strong>
+              Custom sequence to close your gaps in the right order
+            </div>
+          </div>
+          <div class="cta-what-item">
+            <div class="cta-what-icon">⚡</div>
+            <div class="cta-what-text">
+              <strong>Know Your Path</strong>
+              Leave with clarity on exactly what happens next
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <input class="field" id="f-name"  type="text"  placeholder="Full Name" />
+          <input class="field" id="f-email" type="email" placeholder="Email Address" />
+          <input class="field" id="f-phone" type="tel"   placeholder="Phone Number" />
+        </div>
+        <button class="btn-cta" onclick="submitLead()" id="cta-btn">Save My Results & Book My Call →</button>
+        <p class="cta-fine">Free · No obligation · 30 minutes · Your info stays private</p>
+      </div>
+
+      <!-- Booking success state -->
+      <div class="booking-success" id="booking-success">
+        <div class="booking-success-icon">✓</div>
+        <div class="booking-success-title" id="booking-success-title">Results Saved!</div>
+        <p class="booking-success-msg" id="booking-success-msg">
+          Your scorecard results are confirmed and your profile has been created.<br><br>
+          Now pick a time that works for you — your advisor will have your full results in front of them before the call.
+        </p>
+        <a class="btn-book-now" id="booking-calendar-btn" href="contact.html" target="_blank">
+          📅 &nbsp;Pick Your Call Time →
+        </a>
+        <p class="booking-note">30-minute strategy call · Free · No credit card</p>
+      </div>
+
+    </div>
+
+  </div><!-- /results -->
+</div><!-- /wrap -->
+
+<script>
+// ─── QUESTIONS ────────────────────────────────────────────────────────────────
+const questions = [
+
+  // ── AWARENESS / STARTING POINT (new — opens the quiz with framing) ──────────
+
+  {
+    id: 'starting_point',
+    text: 'When it comes to fixing your bonding, credit, or capital situation — where are you right now?',
+    sub: 'This helps us match you with the right starting point. No wrong answer — be honest.',
+    options: [
+      { label: "I know exactly what's blocking me and I'm looking for the right solution", value: 0, flag: 'good', key: 'path_conscious' },
+      { label: "I've felt something was off but couldn't put my finger on what",            value: 0, flag: 'warn', key: 'path_symptomatic' },
+      { label: "Most of what's in this scorecard is new to me — I had no idea",             value: 0, flag: 'warn', key: 'path_unconscious' },
+      { label: "I've tried fixing parts of this before but the results didn't last",        value: 0, flag: 'warn', key: 'path_burned' },
+    ]
+  },
+
+  // ── ORIGINAL QUESTIONS ──────────────────────────────────────────────────────
+
+  {
+    id: 'personal_credit',
+    text: 'Where does your personal credit score currently stand?',
+    sub: 'Your personal FICO score is the #1 factor surety companies and most business lenders look at first. Be honest — this is a private assessment.',
+    options: [
+      { label: 'Below 550 — significant derogatory history',           value: 0,  flag: 'bad',  key: 'credit_below550' },
+      { label: '550 – 619 — damaged but some positive history',        value: 5,  flag: 'bad',  key: 'credit_low' },
+      { label: '620 – 679 — fair, some derogatories present',          value: 15, flag: 'warn', key: 'credit_fair' },
+      { label: '680 – 719 — decent, minor issues',                     value: 22, flag: 'warn', key: 'credit_decent' },
+      { label: '720+ — good to excellent, clean history',              value: 30, flag: 'good', key: 'credit_good' },
+    ]
+  },
+
+  {
+    id: 'business_credit',
+    text: 'What does your business credit profile look like right now?',
+    sub: 'Business credit (Dun & Bradstreet PAYDEX, Experian Business, Equifax Business) is separate from personal credit and critical for funding.',
+    options: [
+      { label: "I don't have a D-U-N-S number or business credit file",      value: 0,  flag: 'bad',  key: 'biz_none' },
+      { label: 'I have a D-U-N-S number but no established trade lines',     value: 3,  flag: 'bad',  key: 'biz_thin' },
+      { label: '1–3 trade accounts, limited history',                        value: 8,  flag: 'warn', key: 'biz_building' },
+      { label: '4+ trade accounts, PAYDEX 70+',                             value: 15, flag: 'good', key: 'biz_established' },
+    ]
+  },
+
+  {
+    id: 'capital_access',
+    text: 'What is your current access to working capital?',
+    sub: 'Government contracts often pay Net-30 to Net-90. Contractors need capital to start work before payment arrives.',
+    options: [
+      { label: 'None — no business credit lines or capital access',       value: 0,  flag: 'bad',  key: 'cap_none' },
+      { label: 'Limited — personal savings only',                         value: 3,  flag: 'warn', key: 'cap_personal' },
+      { label: 'Some — small business credit card or line under $25K',    value: 8,  flag: 'warn', key: 'cap_small' },
+      { label: 'Strong — $50K+ in business credit lines or capital',      value: 15, flag: 'good', key: 'cap_strong' },
+    ]
+  },
+
+  {
+    id: 'supplier_credit',
+    text: 'How do you currently purchase materials and supplies for jobs?',
+    sub: 'Supplier trade credit (net-30 accounts) is one of the fastest ways to build a business credit profile and stop bleeding cash on every job.',
+    options: [
+      { label: 'Cash or debit — no supplier accounts at all',               value: 0, flag: 'bad',  key: 'sup_cash' },
+      { label: "I've tried to open supplier accounts but was declined",     value: 0, flag: 'bad',  key: 'sup_declined' },
+      { label: '1–2 supplier accounts but limited credit lines',            value: 3, flag: 'warn', key: 'sup_limited' },
+      { label: 'Multiple net-30 accounts with solid limits',                value: 5, flag: 'good', key: 'sup_strong' },
+    ]
+  },
+
+  {
+    id: 'cash_flow',
+    text: 'When you complete contract work, how long does it typically take to receive payment?',
+    sub: 'The gap between when work starts and when you get paid is one of the most common cash flow killers for contractors.',
+    options: [
+      { label: 'Net-60 to Net-90 — waiting months strains my operations',       value: 0, flag: 'bad',  key: 'cf_bad' },
+      { label: "Net-30 to Net-45 — manageable but I've had to turn jobs down",  value: 0, flag: 'bad',  key: 'cf_tight' },
+      { label: 'Net-30 or less — tight but I can float it',                     value: 3, flag: 'warn', key: 'cf_ok' },
+      { label: 'I have a credit line or factoring in place — managed',          value: 5, flag: 'good', key: 'cf_managed' },
+    ]
+  },
+
+  {
+    id: 'equipment',
+    text: 'Have you applied for equipment financing or a business loan in the past 2 years?',
+    sub: 'Your financing history tells us how lenders currently view your business profile.',
+    options: [
+      { label: "I haven't applied — I'm paying cash or renting everything",    value: 2,  flag: 'warn', key: 'equip_cash' },
+      { label: 'I applied and was declined',                                    value: 0,  flag: 'bad',  key: 'equip_denied' },
+      { label: 'Approved but only at high rates (15%+)',                        value: 3,  flag: 'warn', key: 'equip_highrate' },
+      { label: 'Approved at reasonable rates — no issues',                      value: 10, flag: 'good', key: 'equip_good' },
+    ]
+  },
+
+  {
+    id: 'personal_guarantee',
+    text: 'Do you sign personally for your business obligations — loans, leases, supplier accounts?',
+    sub: 'Personal guarantees mean your personal credit and assets are exposed every time your business takes on debt.',
+    options: [
+      { label: 'Yes — everything is under my personal name or SSN',              value: 0,  flag: 'bad',  key: 'pg_all' },
+      { label: 'Most things — I have an LLC but still sign personally',          value: 3,  flag: 'warn', key: 'pg_most' },
+      { label: 'Some — I have some separation but not complete',                 value: 8,  flag: 'warn', key: 'pg_some' },
+      { label: 'No — my business stands on its own credit and entity',           value: 12, flag: 'good', key: 'pg_none' },
+    ]
+  },
+
+  {
+    id: 'contract_size',
+    text: 'What size contracts are you currently pursuing?',
+    sub: 'This helps us understand the gap between your current profile and your target opportunity.',
+    options: [
+      { label: 'Under $50,000',              value: 2,  flag: 'warn', key: 'cs_small' },
+      { label: '$50,000 – $250,000',         value: 4,  flag: 'warn', key: 'cs_mid' },
+      { label: '$250,000 – $1,000,000',      value: 6,  flag: 'good', key: 'cs_large' },
+      { label: '$1,000,000+',                value: 8,  flag: 'good', key: 'cs_xlarge' },
+    ]
+  },
+
+  // ── GEOGRAPHIC COVERAGE (new) ───────────────────────────────────────────────
+
+  {
+    id: 'operating_state',
+    text: 'Where do you primarily operate?',
+    sub: 'Bond requirements, licensing rules, and government contracting access vary by state. We tune your sequence to where you actually work.',
+    options: [
+      { label: 'Single state — local or regional focus',          value: 0, flag: 'good', key: 'state_single' },
+      { label: '2–3 states regionally',                           value: 2, flag: 'good', key: 'state_regional' },
+      { label: 'Multi-state (4+) or nationwide',                  value: 3, flag: 'good', key: 'state_multi' },
+      { label: 'Planning to expand to multiple states',           value: 1, flag: 'warn', key: 'state_expanding' },
+    ]
+  },
+
+  // ── 5 NEW QUESTIONS ─────────────────────────────────────────────────────────
+
+  {
+    id: 'bond_range',
+    text: 'What size bond do you need to start bidding the contracts you\'re targeting?',
+    sub: 'Bond size directly determines what financial requirements you\'ll need to meet. This tells us where you are in the bonding ladder.',
+    options: [
+      { label: 'Under $50K — license bond or small local jobs',          value: 8,  flag: 'good', key: 'bond_small' },
+      { label: '$50K – $150K — local/state performance bonds',           value: 6,  flag: 'good', key: 'bond_mid' },
+      { label: '$150K – $500K — mid-range state/commercial bonds',       value: 4,  flag: 'warn', key: 'bond_large' },
+      { label: '$500K+ — large state or federal bonds',                  value: 2,  flag: 'bad',  key: 'bond_xlarge' },
+    ]
+  },
+
+  {
+    id: 'bond_type',
+    text: 'Which type of surety bond do you need or are currently pursuing?',
+    sub: 'Bond types have very different credit thresholds and underwriting requirements — your answer changes which part of your profile we prioritize.',
+    options: [
+      { label: "License / Permit Bond — required to hold my contractor's license",   value: 0, flag: 'warn', key: 'bt_license'     },
+      { label: 'Bid Bond — required to submit a bid on a project',                   value: 0, flag: 'warn', key: 'bt_bid'         },
+      { label: 'Performance & Payment Bond — required to execute a contract',        value: 0, flag: 'warn', key: 'bt_performance' },
+      { label: 'Multiple types — I need more than one',                               value: 0, flag: 'warn', key: 'bt_multiple'    },
+      { label: "I'm not sure which bond type I need",                                value: 0, flag: 'bad',  key: 'bt_unknown'     },
+    ]
+  },
+
+  {
+    id: 'years_in_business',
+    text: 'How long has your current business entity been legally operating?',
+    sub: 'Surety underwriters use business age as a stability signal. This also tells us whether an aged corp strategy applies to your situation.',
+    options: [
+      { label: 'Less than 1 year — brand new entity',                    value: 0,  flag: 'bad',  key: 'age_new' },
+      { label: '1 – 2 years — early stage',                             value: 3,  flag: 'warn', key: 'age_early' },
+      { label: '3 – 5 years — established but still building',          value: 8,  flag: 'good', key: 'age_mid' },
+      { label: '5+ years — seasoned entity with history',               value: 12, flag: 'good', key: 'age_seasoned' },
+    ]
+  },
+
+  {
+    id: 'contract_type',
+    text: 'What type of contracts are you primarily trying to win?',
+    sub: 'Federal, state, and local contracts have very different bonding and documentation requirements. This shapes your program path.',
+    options: [
+      { label: 'Local government / municipal',                           value: 8,  flag: 'good', key: 'ct_local' },
+      { label: 'State government contracts',                             value: 6,  flag: 'good', key: 'ct_state' },
+      { label: 'Federal (SAM.gov / Miller Act)',                         value: 4,  flag: 'warn', key: 'ct_federal' },
+      { label: 'Private commercial',                                     value: 6,  flag: 'good', key: 'ct_private' },
+    ]
+  },
+
+  {
+    id: 'annual_revenue',
+    text: 'What is your business\'s approximate annual gross revenue?',
+    sub: 'Revenue level determines which funding products you qualify for and your realistic bond capacity ceiling.',
+    options: [
+      { label: 'Under $100K',              value: 0,  flag: 'bad',  key: 'rev_under100' },
+      { label: '$100K – $300K',            value: 4,  flag: 'warn', key: 'rev_100_300' },
+      { label: '$300K – $750K',            value: 8,  flag: 'good', key: 'rev_300_750' },
+      { label: '$750K+',                   value: 12, flag: 'good', key: 'rev_750plus' },
+    ]
+  },
+
+  {
+    id: 'license_status',
+    text: 'What is your current contractor licensing status?',
+    sub: 'Licensing status tells us how urgent your bonding need is and where you are in the qualifying process.',
+    options: [
+      { label: 'Licensed and active',                                    value: 10, flag: 'good', key: 'lic_active' },
+      { label: 'License expired or lapsed',                             value: 3,  flag: 'bad',  key: 'lic_lapsed' },
+      { label: 'Currently in the licensing process',                    value: 6,  flag: 'warn', key: 'lic_inprocess' },
+      { label: 'Not yet licensed',                                      value: 0,  flag: 'bad',  key: 'lic_none' },
+    ]
+  },
+
+  {
+    id: 'trade_experience',
+    text: 'How many years of hands-on experience do you have in your trade?',
+    sub: 'Experience level helps us understand your readiness to bid and execute the contracts you\'re targeting.',
+    options: [
+      { label: 'Under 2 years — still learning the trade',              value: 0,  flag: 'warn', key: 'exp_new' },
+      { label: '2 – 5 years — solid foundation, growing',              value: 5,  flag: 'warn', key: 'exp_mid' },
+      { label: '5 – 10 years — experienced, knows the business',       value: 8,  flag: 'good', key: 'exp_senior' },
+      { label: '10+ years — veteran contractor',                       value: 10, flag: 'good', key: 'exp_veteran' },
+    ]
+  },
+
+  // ── RECENT SETBACK (multi-select — high signal qualifier) ───────────────────
+
+  {
+    id: 'recent_setback',
+    type: 'multi-select',
+    text: 'Have you been declined or unfavorably quoted for any of the following in the last 12 months?',
+    sub: 'Recent rejection isn\'t a problem — it\'s data. Check all that apply.',
+    minSelections: 1,
+    options: [
+      { label: 'Bond application — declined or priced very high',   value: 0, flag: 'bad',  key: 'setback_bond' },
+      { label: 'Business line of credit',                            value: 0, flag: 'bad',  key: 'setback_loc' },
+      { label: 'Equipment financing',                                value: 0, flag: 'bad',  key: 'setback_equipment' },
+      { label: 'Supplier net-30 account',                            value: 0, flag: 'bad',  key: 'setback_supplier' },
+      { label: 'License renewal or application',                     value: 0, flag: 'bad',  key: 'setback_license' },
+      { label: 'Won a contract but couldn\'t fund it',               value: 0, flag: 'bad',  key: 'setback_fund' },
+      { label: 'None of the above',                                  value: 5, flag: 'good', key: 'setback_none', exclusive: true },
+    ]
+  },
+
+  // ── CERTIFICATIONS (multi-select — gov contractor segment marker) ───────────
+
+  {
+    id: 'certifications',
+    type: 'multi-select',
+    text: 'Are you certified or pursuing any of the following?',
+    sub: 'Set-aside certifications open specific federal and state contracts. Check all that apply.',
+    minSelections: 1,
+    options: [
+      { label: 'HUBZone',                                       value: 2, flag: 'good', key: 'cert_hubzone' },
+      { label: '8(a) Business Development',                     value: 2, flag: 'good', key: 'cert_8a' },
+      { label: 'WOSB / EDWOSB (Women-Owned)',                  value: 2, flag: 'good', key: 'cert_wosb' },
+      { label: 'SDVOSB (Service-Disabled Veteran-Owned)',      value: 2, flag: 'good', key: 'cert_sdvosb' },
+      { label: 'DBE / MBE (state or local)',                   value: 2, flag: 'good', key: 'cert_dbe' },
+      { label: 'Not certified yet, but interested',             value: 1, flag: 'warn', key: 'cert_interested', exclusive: true },
+      { label: 'Not pursuing certifications',                   value: 0, flag: 'warn', key: 'cert_none',       exclusive: true },
+    ]
+  },
+
+  // ── TIMELINE URGENCY (final qualifier — captures call prep priority) ────────
+
+  {
+    id: 'timeline_urgency',
+    text: 'Is there a specific deadline driving your timeline right now?',
+    sub: 'This helps us understand whether we\'re planning for the next 12 months or responding to something already in front of you.',
+    options: [
+      { label: 'Yes — bid or contract opportunity in the next 30 days',   value: 0, flag: 'warn', key: 'urgency_high' },
+      { label: 'Yes — something coming up in 60–90 days',                  value: 0, flag: 'warn', key: 'urgency_medium' },
+      { label: 'No specific deadline — I\'m planning ahead',               value: 2, flag: 'good', key: 'urgency_low' },
+      { label: 'Not pursuing opportunities yet — building first',          value: 0, flag: 'warn', key: 'urgency_foundation' },
+    ]
+  },
+
+];
+
+// ─── TIER DEFINITIONS ─────────────────────────────────────────────────────────
+const tiers = [
+  {
+    min: 0, max: 30,
+    label: 'NOT READY',
+    color: '#c0392b',
+    meterColor: 'linear-gradient(90deg,#c0392b,#e74c3c)',
+    summary: "Your profile has significant gaps actively blocking you from bonding, funding, and larger contracts. The good news — every one of these gaps is fixable with the right roadmap. This is exactly who we built Bridgescale for."
+  },
+  {
+    min: 31, max: 60,
+    label: 'BUILDING',
+    color: '#e67e22',
+    meterColor: 'linear-gradient(90deg,#e67e22,#f39c12)',
+    summary: "You've got real foundation here — but there are clear gaps in your profile that are quietly costing you contracts and funding access. The right program closes those gaps faster than you think."
+  },
+  {
+    min: 61, max: 82,
+    label: 'READY',
+    color: '#c9a84c',
+    meterColor: 'linear-gradient(90deg,#c9a84c,#e8c97a)',
+    summary: "Your profile is solid and you're close. A few targeted moves will unlock the next tier of contracts, better bond rates, and expanded funding capacity. You're not starting over — you're finishing the job."
+  },
+  {
+    min: 83, max: 999,
+    label: 'POSITIONED',
+    color: '#27ae60',
+    meterColor: 'linear-gradient(90deg,#1a7a4a,#27ae60)',
+    summary: "Strong profile. You're in a good position to compete for significant contracts. The focus now is optimization — better rates, higher bond capacity, and scaling the financial infrastructure you've already built."
+  }
+];
+
+// ─── SCENARIO DEFINITIONS ─────────────────────────────────────────────────────
+const scenarioDefs = [
+  {
+    id: 's1',
+    tag: 'SCENARIO 1 — BOND / LICENSE BLOCKED',
+    title: 'Personal Credit Is Blocking Your Bond Application',
+    desc: "Your personal credit score is below the threshold most surety companies require. Every time you apply for a bond, it's getting declined or priced at a premium that kills your margins. This is the most common blocker we see — and it's directly fixable with credit repair.",
+    trigger: a => ['credit_below550','credit_low','credit_fair'].includes(a.personal_credit),
+    severity: 'bad'
+  },
+  {
+    id: 's2',
+    tag: 'SCENARIO 2 — CASH FLOW GAP',
+    title: 'Payment Terms Are Straining Your Operations',
+    desc: "You're winning work but the Net-30 to Net-90 payment cycle is killing your ability to float payroll, materials, and overhead. Without a business line of credit, every new contract creates a new financial crisis. You need capital infrastructure behind you.",
+    trigger: a => ['cf_bad','cf_tight'].includes(a.cash_flow),
+    severity: 'bad'
+  },
+  {
+    id: 's3',
+    tag: 'SCENARIO 3 — PERSONAL GUARANTEE TRAP',
+    title: 'Your Business Is Not Financially Separated From You',
+    desc: "You're signing personally for business obligations — which means one bad season can damage your personal credit and expose your personal assets. You've never built a business credit profile that stands on its own. This needs to change before you take on larger contracts.",
+    trigger: a => ['pg_all','pg_most'].includes(a.personal_guarantee),
+    severity: 'bad'
+  },
+  {
+    id: 's4',
+    tag: 'SCENARIO 4 — EQUIPMENT FINANCING DENIED',
+    title: 'Lenders Are Declining or Overcharging You',
+    desc: "Being denied or approved only at predatory rates (15%+) tells us lenders see your business as high-risk. This is a business credit and profile problem — not a permanent reality. The right build-out gets you to bank-rate terms.",
+    trigger: a => ['equip_denied','equip_highrate'].includes(a.equipment),
+    severity: 'bad'
+  },
+  {
+    id: 's5',
+    tag: 'SCENARIO 5 — SUPPLIER TRADE CREDIT DENIED',
+    title: 'You\'re Paying Cash for Materials on Every Job',
+    desc: "No supplier net-30 accounts means you're financing your clients at 0% every time you buy materials. This kills your margins and limits how many jobs you can run simultaneously. Net-30 trade accounts are the fastest way to start building a real business credit score.",
+    trigger: a => ['sup_cash','sup_declined'].includes(a.supplier_credit),
+    severity: 'bad'
+  },
+  {
+    id: 's6',
+    tag: 'SCENARIO 6 — SCALING BLOCKED BY FUNDING',
+    title: 'Your Business Can\'t Fund Growth at Its Current Profile',
+    desc: "You have the work and the experience — but the financial infrastructure isn't there to execute multiple jobs, hire crews, or take on contracts that require significant upfront capital. This is a fundability problem, not a capability problem.",
+    trigger: a => ['cap_none','cap_personal'].includes(a.capital_access) && ['exp_senior','exp_veteran'].includes(a.trade_experience),
+    severity: 'warn'
+  },
+  {
+    id: 's7',
+    tag: 'SCENARIO 7 — LICENSE BOND BLOCKED',
+    title: 'Your License Bond Is at Risk or Has Already Been Denied',
+    desc: "A license or permit bond is required in most states just to legally hold a contractor's license — California's CSLB requires a $25,000 bond as a baseline. Most surety companies use 650 FICO as a floor for license bonds, and some require 680+. A denial here doesn't just mean losing a contract — it can cost you your license entirely. This is one of the fastest scenarios to resolve with targeted credit repair, and it's often what brings contractors to Bridgescale in the first place.",
+    trigger: a => a.bond_type === 'bt_license' && ['credit_below550','credit_low','credit_fair'].includes(a.personal_credit),
+    severity: 'bad'
+  },
+  {
+    id: 's8',
+    tag: 'SCENARIO 8 — BOND TYPE MISMATCH',
+    title: 'You\'re Unclear Which Bond Your Contracts Require',
+    desc: "Not knowing which bond type you need is a real risk — applying for the wrong bond, or missing a requirement entirely, leads to bid disqualifications, contract delays, and lost awards. Bid bonds are needed just to submit. Performance and payment bonds are needed to execute. License bonds are needed to operate legally. If you're uncertain, your Bridgescale advisor will map your specific contract targets to their exact bonding requirements and build your qualification path from there.",
+    trigger: a => a.bond_type === 'bt_unknown',
+    severity: 'warn'
+  },
+  {
+    id: 's9',
+    tag: 'SCENARIO 9 — PREVIOUSLY BURNED',
+    title: 'You\'ve Tried This Before and It Didn\'t Stick',
+    desc: "You've worked with credit repair, surety, or contractor finance providers before — and the results didn't hold. That's not your fault. Most consumer-grade credit shops don't understand contractor financial infrastructure. They fix one layer in isolation and leave the rest of the stack untouched, which means the gains they made get undone by the next ceiling. Bridgescale is built specifically for contractors, and we sequence the work across all four layers so each piece reinforces the next instead of getting unwound.",
+    trigger: a => a.starting_point === 'path_burned',
+    severity: 'warn'
+  },
+  {
+    id: 's10',
+    tag: 'SCENARIO 10 — URGENT DEADLINE',
+    title: 'You Have a Bid or Contract Window Closing Soon',
+    desc: "You're working against a real timeline — a bid, an award, or a renewal in the next 30 days. We'll be straight with you: the full Bridgescale sequence takes time, and some pieces genuinely can't be accelerated. Your strategy call will focus on what we can move quickly to give you the best shot at this specific opportunity, what we can position for the next opportunity if this one slips, and how to make sure this isn't a repeat scenario 12 months from now.",
+    trigger: a => a.timeline_urgency === 'urgency_high',
+    severity: 'warn'
+  },
+  {
+    id: 's11',
+    tag: 'SCENARIO 11 — MULTIPLE RECENT REJECTIONS',
+    title: 'You\'re Getting Declined Across Multiple Financial Relationships',
+    desc: "Multiple recent rejections — bonding, financing, supplier terms, license — point to a structural credit and profile problem, not isolated bad luck. The pattern of rejections is itself the diagnostic. Lenders and underwriters across the board are seeing the same underlying issue and responding the same way. This is the most fixable kind of stuck because once the root cause is addressed, the rejections stop happening across all of them simultaneously.",
+    trigger: a => Array.isArray(a.recent_setback) && a.recent_setback.length >= 3 && !a.recent_setback.includes('setback_none'),
+    severity: 'bad'
+  },
+  {
+    id: 's12',
+    tag: 'SCENARIO 12 — CERTIFIED CONTRACTOR FUNDING GAP',
+    title: 'You\'re Certified but Can\'t Fulfill What It Opens',
+    desc: "You hold or are pursuing federal/state set-aside certifications (8(a), HUBZone, WOSB, SDVOSB, DBE). Certification opens the door — but financial infrastructure is what lets you walk through it. Many certified contractors get into bid rooms they couldn't reach before, only to lose the contracts because they can't fund the work or meet bond requirements. Your sequence prioritizes the financial layer that converts certification status into actual contract wins.",
+    trigger: a => {
+      const hasCert = Array.isArray(a.certifications) && a.certifications.some(k => 
+        ['cert_hubzone','cert_8a','cert_wosb','cert_sdvosb','cert_dbe'].includes(k)
+      );
+      const fundingGap = ['cap_none','cap_personal'].includes(a.capital_access) 
+        || ['credit_below550','credit_low','credit_fair'].includes(a.personal_credit);
+      return hasCert && fundingGap;
+    },
+    severity: 'warn'
+  },
+  {
+    id: 's13',
+    tag: 'SCENARIO 13 — MULTI-STATE COMPLEXITY',
+    title: 'You\'re Operating Across Multiple States',
+    desc: "Multi-state contractors face compounding complexity — different licensing requirements, different bond thresholds, different surety relationships, different state-level set-aside programs. Bridgescale's GEO Network is built specifically for this. Your sequence includes state-by-state mapping so the financial infrastructure you build is portable across every state you operate in, and so you don't rebuild the wheel each time you cross a state line.",
+    trigger: a => ['state_regional','state_multi'].includes(a.operating_state),
+    severity: 'warn'
+  },
+];
+
+// ─── PROGRAM DEFINITIONS ──────────────────────────────────────────────────────
+const programs = [
+  {
+    id: 'foundation',
+    name: 'Foundation Program',
+    tagline: 'Fix the credit. Start the clock. Get bondable.',
+    includes: [
+      { text: 'Personal credit repair — target 680+ FICO', note: 'Disputes, removal strategy, score optimization' },
+      { text: 'Business credit foundation build', note: 'D-U-N-S setup, net-30 trade accounts, PAYDEX establishment' },
+      { text: 'Entity structuring review', note: 'Ensure your LLC/Corp is set up to receive funding' },
+      { text: 'License bond readiness assessment', note: 'Know exactly what you need to qualify' },
+    ],
+    cta: 'Book Your Foundation Strategy Call',
+    match: (score, scenarios, answers) =>
+      score <= 40 ||
+      ['credit_below550','credit_low'].includes(answers.personal_credit) ||
+      (answers.bond_type === 'bt_license' && ['credit_below550','credit_low','credit_fair'].includes(answers.personal_credit))
+  },
+  {
+    id: 'accelerator',
+    name: 'Accelerator Program',
+    tagline: 'Build the profile. Get bonded. Start winning contracts.',
+    includes: [
+      { text: 'Everything in Foundation', note: 'Credit repair + business credit build' },
+      { text: 'Aged corp placement', note: 'Immediately satisfy years-in-business requirements' },
+      { text: 'Surety bond qualification strategy', note: 'Performance + payment bond readiness up to $250K' },
+      { text: 'Funding strategy roadmap', note: 'LOC, equipment financing, supplier terms — sequenced correctly' },
+    ],
+    cta: 'Book Your Accelerator Strategy Call',
+    match: (score, scenarios, answers) =>
+      (score > 40 && score <= 65) ||
+      ['age_new','age_early'].includes(answers.years_in_business) ||
+      ['lic_lapsed','lic_none'].includes(answers.license_status) ||
+      answers.bond_type === 'bt_unknown'
+  },
+  {
+    id: 'funding_strategy',
+    name: 'Funding Strategy Program',
+    tagline: 'Optimize the profile. Access capital. Scale the business.',
+    includes: [
+      { text: 'Everything in Accelerator', note: 'Full foundation + bond readiness' },
+      { text: 'Working capital access — LOC targeting $50K–$250K', note: 'Business lines of credit with bank-rate terms' },
+      { text: 'Equipment financing at competitive rates', note: 'Get off predatory lender rates for good' },
+      { text: 'Government contracting financial readiness', note: 'SAM.gov profile + bonding package for state contracts' },
+    ],
+    cta: 'Book Your Funding Strategy Call',
+    match: (score, scenarios, answers) =>
+      score > 65 ||
+      ['ct_federal','ct_state'].includes(answers.contract_type) ||
+      ['rev_300_750','rev_750plus'].includes(answers.annual_revenue)
+  },
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let current = 0;
+const answers = {};
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function renderQ() {
+  const q = questions[current];
+  const total = questions.length;
+  const pct = (current / total) * 100;
+  const isMulti = q.type === 'multi-select';
+
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-count').textContent = `Question ${current + 1} of ${total}`;
+  document.getElementById('q-number').textContent = `${String(current+1).padStart(2,'0')} / ${String(total).padStart(2,'0')}`;
+  document.getElementById('q-text').textContent = q.text;
+
+  // Append multi-select hint to sub-text when applicable
+  const subEl = document.getElementById('q-sub');
+  subEl.innerHTML = q.sub + (isMulti ? '<br><span class="multi-select-hint">Select all that apply</span>' : '');
+
+  const optWrap = document.getElementById('options');
+  optWrap.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    const selected = isMulti
+      ? (Array.isArray(answers[q.id]) && answers[q.id].includes(i))
+      : (answers[q.id] === i);
+    div.className = 'option' + (selected ? ' selected' : '');
+    div.innerHTML = `
+      <div class="option-radio${isMulti ? ' option-check' : ''}"></div>
+      <div class="option-label">${opt.label}</div>
+    `;
+    div.onclick = () => selectOption(i);
+    optWrap.appendChild(div);
+  });
+
+  // Enable Next based on question type
+  const hasAnswer = isMulti
+    ? (Array.isArray(answers[q.id]) && answers[q.id].length >= (q.minSelections || 1))
+    : (answers[q.id] !== undefined);
+  document.getElementById('btn-next').disabled = !hasAnswer;
+  document.getElementById('btn-back').disabled = current === 0;
+
+  // Animate card
+  const card = document.getElementById('question-card');
+  card.style.animation = 'none';
+  void card.offsetWidth;
+  card.style.animation = 'fadeUp 0.4s ease both';
+}
+
+function selectOption(i) {
+  const q = questions[current];
+  const isMulti = q.type === 'multi-select';
+
+  if (isMulti) {
+    let arr = Array.isArray(answers[q.id]) ? [...answers[q.id]] : [];
+    const opt = q.options[i];
+
+    if (opt.exclusive) {
+      // Exclusive option (e.g., "None of the above"): clears all others
+      arr = arr.includes(i) ? [] : [i];
+    } else {
+      // Picking a non-exclusive option removes any exclusive ones
+      arr = arr.filter(idx => !q.options[idx].exclusive);
+      // Toggle this option
+      if (arr.includes(i)) {
+        arr = arr.filter(idx => idx !== i);
+      } else {
+        arr.push(i);
+      }
+    }
+    answers[q.id] = arr;
+  } else {
+    answers[q.id] = i;
+  }
+  renderQ();
+}
+
+function nextQ() {
+  const q = questions[current];
+  const isMulti = q.type === 'multi-select';
+  const hasAnswer = isMulti
+    ? (Array.isArray(answers[q.id]) && answers[q.id].length >= (q.minSelections || 1))
+    : (answers[q.id] !== undefined);
+  if (!hasAnswer) return;
+  if (current < questions.length - 1) {
+    current++;
+    renderQ();
+  } else {
+    showResults();
+  }
+}
+
+function prevQ() {
+  if (current > 0) { current--; renderQ(); }
+}
+
+// ─── RESULTS ──────────────────────────────────────────────────────────────────
+function showResults() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
+
+  // Compute score
+  let score = 0;
+  const answerKeys = {};
+  questions.forEach(q => {
+    const ans = answers[q.id];
+    if (ans === undefined) return;
+
+    if (q.type === 'multi-select') {
+      // Sum values from all selected options; store keys as array
+      if (Array.isArray(ans)) {
+        ans.forEach(idx => { score += q.options[idx].value; });
+        answerKeys[q.id] = ans.map(idx => q.options[idx].key);
+      }
+    } else {
+      score += q.options[ans].value;
+      answerKeys[q.id] = q.options[ans].key;
+    }
+  });
+
+  // Normalize to 100 — handle multi-select max calc
+  const maxScore = questions.reduce((sum, q) => {
+    if (q.type === 'multi-select') {
+      // Max = sum of all non-exclusive positive values OR best exclusive (whichever higher)
+      const nonExclSum = q.options
+        .filter(o => !o.exclusive)
+        .reduce((s, o) => s + Math.max(0, o.value), 0);
+      const bestExcl = Math.max(0, ...q.options.filter(o => o.exclusive).map(o => o.value));
+      return sum + Math.max(nonExclSum, bestExcl);
+    }
+    return sum + Math.max(...q.options.map(o => o.value));
+  }, 0);
+  const normalized = Math.round((score / maxScore) * 100);
+
+  // Tier
+  const tier = tiers.find(t => normalized >= t.min && normalized <= t.max) || tiers[0];
+
+  // Animate score
+  const numEl = document.getElementById('score-num');
+  let n = 0;
+  const step = Math.ceil(normalized / 40);
+  const ticker = setInterval(() => {
+    n = Math.min(n + step, normalized);
+    numEl.textContent = n;
+    if (n >= normalized) clearInterval(ticker);
+  }, 30);
+
+  // Tier label + summary
+  const tierEl = document.getElementById('score-tier');
+  tierEl.textContent = tier.label;
+  tierEl.style.background = tier.color + '22';
+  tierEl.style.color = tier.color;
+  tierEl.style.border = `1px solid ${tier.color}55`;
+  document.getElementById('score-summary').textContent = tier.summary;
+
+  // Meter
+  setTimeout(() => {
+    const bar = document.getElementById('meter-bar');
+    bar.style.width = normalized + '%';
+    bar.style.background = tier.meterColor;
+    bar.style.boxShadow = `0 0 12px ${tier.color}55`;
+  }, 200);
+
+  // ── DISCLAIMER BANNERS ──
+  const disclaimerEl = document.getElementById('disclaimer-banner');
+  const disclaimerText = document.getElementById('disclaimer-text');
+  const flags = [];
+
+  if (answerKeys.personal_credit === 'credit_below550') {
+    flags.push('<strong>Credit Score Flag:</strong> With a score below 550, your credit repair timeline will be 6–12+ months before bonding becomes realistic. We can absolutely get you there — but we want to set honest expectations on the timeline from day one.');
+  }
+  if (answerKeys.contract_type === 'ct_federal') {
+    flags.push('<strong>Federal Bond Flag:</strong> Federal contracts (Miller Act, SAM.gov) require 3 years of audited financial statements for larger bonds. Your program starts the financial clock today — federal-level bonding is a 12–24 month runway from where you are now.');
+  }
+  if (answerKeys.bond_range === 'bond_xlarge') {
+    flags.push('<strong>Large Bond Flag:</strong> Bonds over $500K require CPA-prepared multi-year financials. Our program builds the foundation — but full qualification at this level takes time to accumulate.');
+  }
+  if (answerKeys.annual_revenue === 'rev_under100') {
+    flags.push('<strong>Revenue Flag:</strong> At under $100K annual revenue, some funding products won\'t be available yet. We\'ll focus on credit foundation and bonding access first, then unlock capital products as revenue grows.');
+  }
+  if (answerKeys.bond_type === 'bt_license' && ['credit_below550','credit_low'].includes(answerKeys.personal_credit)) {
+    flags.push('<strong>License Bond Flag:</strong> With your current credit score, most surety companies will decline a license bond application immediately. In states like California (CSLB), this puts your license itself at risk. Credit repair is urgent — not optional — in this scenario.');
+  }
+  if (answerKeys.bond_type === 'bt_unknown') {
+    flags.push('<strong>Bond Type Flag:</strong> Not knowing which bond your contracts require is a gap your advisor will close on the strategy call. Applying for the wrong bond type, or missing a requirement, is one of the most common reasons contractors lose bids before they even get reviewed.');
+  }
+  if (answerKeys.timeline_urgency === 'urgency_high') {
+    flags.push('<strong>Urgent Timeline Flag:</strong> You\'ve identified a deadline within 30 days. Your strategy call will be structured around what we can move FAST for the immediate opportunity, what we can position for the next one, and how to prevent another last-minute scramble. Be honest with yourself: structural credit work takes time. If the immediate deadline is the only thing that matters, we may not be the right fit for THIS bid — but we can absolutely build the foundation for the next twelve months of opportunities.');
+  }
+  if (answerKeys.starting_point === 'path_burned') {
+    flags.push('<strong>Previously Burned Flag:</strong> You\'ve mentioned trying to fix parts of this before without lasting results. We hear this constantly. Most consumer-grade credit shops and bond agencies work in isolation — they fix one layer and the rest of the stack unwinds the gains. Bridgescale\'s vertical integration is built specifically to prevent this pattern. Your call will dig into what you tried before so we can be specific about why the approach we recommend is different.');
+  }
+  if (flags.length > 0) {
+    disclaimerText.innerHTML = flags.join('<br><br>');
+    disclaimerEl.style.display = 'block';
+  }
+
+  // ── PROFILE FLAGS ──
+  const flagsGrid = document.getElementById('flags-grid');
+  flagsGrid.innerHTML = '';
+  const flagItems = [
+    {
+      label: 'Personal Credit',
+      getValue: () => ({ 'credit_below550':'Below 550','credit_low':'550–619','credit_fair':'620–679','credit_decent':'680–719','credit_good':'720+' }[answerKeys.personal_credit] || '—'),
+      getClass: () => ['credit_below550','credit_low'].includes(answerKeys.personal_credit) ? 'red' : answerKeys.personal_credit === 'credit_good' ? 'green' : 'warn',
+      icon: '📊',
+      note: 'FICO score range'
+    },
+    {
+      label: 'Business Age',
+      getValue: () => ({ 'age_new':'< 1 Year','age_early':'1–2 Years','age_mid':'3–5 Years','age_seasoned':'5+ Years' }[answerKeys.years_in_business] || '—'),
+      getClass: () => ['age_new','age_early'].includes(answerKeys.years_in_business) ? 'warn' : 'green',
+      icon: '📅',
+      note: 'Entity operating history'
+    },
+    {
+      label: 'Annual Revenue',
+      getValue: () => ({ 'rev_under100':'Under $100K','rev_100_300':'$100K–$300K','rev_300_750':'$300K–$750K','rev_750plus':'$750K+' }[answerKeys.annual_revenue] || '—'),
+      getClass: () => answerKeys.annual_revenue === 'rev_under100' ? 'red' : ['rev_300_750','rev_750plus'].includes(answerKeys.annual_revenue) ? 'green' : 'warn',
+      icon: '💰',
+      note: 'Gross annual revenue'
+    },
+    {
+      label: 'Bond Range Needed',
+      getValue: () => ({ 'bond_small':'Under $50K','bond_mid':'$50K–$150K','bond_large':'$150K–$500K','bond_xlarge':'$500K+' }[answerKeys.bond_range] || '—'),
+      getClass: () => ['bond_small','bond_mid'].includes(answerKeys.bond_range) ? 'green' : 'warn',
+      icon: '🔒',
+      note: 'Target bond requirement'
+    },
+    {
+      label: 'License Status',
+      getValue: () => ({ 'lic_active':'Active','lic_lapsed':'Lapsed','lic_inprocess':'In Process','lic_none':'Not Licensed' }[answerKeys.license_status] || '—'),
+      getClass: () => answerKeys.license_status === 'lic_active' ? 'green' : ['lic_lapsed','lic_none'].includes(answerKeys.license_status) ? 'red' : 'warn',
+      icon: '📋',
+      note: 'Contractor license'
+    },
+    {
+      label: 'Contract Target',
+      getValue: () => ({ 'ct_local':'Local Gov','ct_state':'State Gov','ct_federal':'Federal','ct_private':'Private Commercial' }[answerKeys.contract_type] || '—'),
+      getClass: () => answerKeys.contract_type === 'ct_federal' ? 'warn' : 'green',
+      icon: '🏛️',
+      note: 'Primary contract type'
+    },
+    {
+      label: 'Bond Type',
+      getValue: () => ({ 'bt_license':'License / Permit','bt_bid':'Bid Bond','bt_performance':'Performance & Payment','bt_multiple':'Multiple Types','bt_unknown':'Not Sure Yet' }[answerKeys.bond_type] || '—'),
+      getClass: () => answerKeys.bond_type === 'bt_unknown' ? 'red' : answerKeys.bond_type === 'bt_performance' ? 'warn' : 'green',
+      icon: '📜',
+      note: 'Bond type needed'
+    },
+    {
+      label: 'Starting Point',
+      getValue: () => ({
+        'path_conscious':'Knows the Fix',
+        'path_symptomatic':'Sees Symptoms',
+        'path_unconscious':'New to Concept',
+        'path_burned':'Previously Burned'
+      }[answerKeys.starting_point] || '—'),
+      getClass: () => answerKeys.starting_point === 'path_burned' ? 'warn'
+        : answerKeys.starting_point === 'path_conscious' ? 'green' : 'warn',
+      icon: '🎯',
+      note: 'Where you are with this'
+    },
+    {
+      label: 'Timeline',
+      getValue: () => ({
+        'urgency_high':'Urgent (<30 days)',
+        'urgency_medium':'60–90 days',
+        'urgency_low':'Planning ahead',
+        'urgency_foundation':'Building first'
+      }[answerKeys.timeline_urgency] || '—'),
+      getClass: () => answerKeys.timeline_urgency === 'urgency_high' ? 'warn' : 'green',
+      icon: '⏱️',
+      note: 'Deadline pressure'
+    },
+    {
+      label: 'State Coverage',
+      getValue: () => ({
+        'state_single':'Single state',
+        'state_regional':'2–3 states',
+        'state_multi':'Multi-state',
+        'state_expanding':'Expanding'
+      }[answerKeys.operating_state] || '—'),
+      getClass: () => ['state_regional','state_multi'].includes(answerKeys.operating_state) ? 'warn' : 'green',
+      icon: '📍',
+      note: 'Geographic footprint'
+    },
+    {
+      label: 'Recent Setbacks',
+      getValue: () => {
+        const arr = answerKeys.recent_setback;
+        if (!Array.isArray(arr) || arr.length === 0) return '—';
+        if (arr.includes('setback_none')) return 'None recent';
+        return arr.length === 1 ? '1 area' : arr.length + ' areas';
+      },
+      getClass: () => {
+        const arr = answerKeys.recent_setback;
+        if (!Array.isArray(arr) || arr.includes('setback_none')) return 'green';
+        return arr.length >= 3 ? 'red' : 'warn';
+      },
+      icon: '⚠️',
+      note: 'Declines in last 12mo'
+    },
+    {
+      label: 'Certifications',
+      getValue: () => {
+        const arr = answerKeys.certifications;
+        if (!Array.isArray(arr) || arr.length === 0) return '—';
+        if (arr.includes('cert_none')) return 'None pursued';
+        if (arr.includes('cert_interested')) return 'Interested';
+        return arr.length === 1 ? '1 certification' : arr.length + ' certifications';
+      },
+      getClass: () => {
+        const arr = answerKeys.certifications;
+        if (!Array.isArray(arr)) return 'warn';
+        if (arr.includes('cert_none')) return 'warn';
+        if (arr.includes('cert_interested')) return 'warn';
+        return 'green';
+      },
+      icon: '🏅',
+      note: 'Set-aside status'
+    },
+  ];
+  flagItems.forEach(f => {
+    const cls = f.getClass();
+    const val = f.getValue();
+    flagsGrid.innerHTML += `
+      <div class="flag-item ${cls}">
+        <div class="flag-icon">${f.icon}</div>
+        <div class="flag-label">${f.label}</div>
+        <div class="flag-value">${val}</div>
+        <div class="flag-note">${f.note}</div>
+      </div>`;
+  });
+
+  // ── SCENARIOS ──
+  const scenarioList = document.getElementById('scenario-list');
+  scenarioList.innerHTML = '';
+  const active = scenarioDefs.filter(s => s.trigger(answerKeys));
+  if (active.length === 0) {
+    scenarioList.innerHTML = `
+      <div class="scenario-clear">
+        <div class="scenario-clear-tag">✓ NO CRITICAL BLOCKERS DETECTED</div>
+        <p>Your profile doesn't show any major structural blockers. The focus for your program is optimization — improving rates, increasing bond capacity, and scaling your financial infrastructure to match your contracting ambitions.</p>
+      </div>`;
+  } else {
+    active.forEach(s => {
+      scenarioList.innerHTML += `
+        <div class="scenario-item ${s.severity === 'warn' ? 'warn' : ''}">
+          <div class="scenario-tag">${s.tag.replace(/^SCENARIO \d+ — /, '')}</div>
+          <div class="scenario-title">${s.title}</div>
+          <div class="scenario-desc">${s.desc}</div>
+        </div>`;
+    });
+  }
+
+  // ── PROGRAM RECOMMENDATION ──
+  const prog = programs.find(p => p.match(normalized, active, answerKeys)) || programs[0];
+  document.getElementById('prog-name').textContent = prog.name;
+  document.getElementById('prog-tagline').textContent = prog.tagline;
+  const incEl = document.getElementById('prog-includes');
+  incEl.innerHTML = prog.includes.map(item => `
+    <div class="prog-item">
+      <span class="prog-arrow">→</span>
+      <div>
+        <div>${item.text}</div>
+        <div class="prog-note">${item.note}</div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('cta-btn').textContent = 'Save My Results & Book My Call →';
+  document.getElementById('cta-heading').textContent = 'Your Results Are In — Book Your Strategy Call';
+  document.getElementById('cta-sub').textContent =
+    `You've been matched with the ${prog.name}. Enter your info below and pick your call time directly on our calendar — your advisor will have your full results ready before you connect.`;
+
+  // ── BOND COST IMPACT ──────────────────────────────────────────────────────────
+  (function renderBondImpact() {
+
+    // ── MAP ANSWERS TO BOND INPUTS ──
+
+    // Credit tier
+    const creditMap = {
+      credit_below550: 'poor', credit_low: 'poor',
+      credit_fair: 'fair', credit_decent: 'good', credit_good: 'excellent'
+    };
+    const tierKey = creditMap[answerKeys.personal_credit] || 'fair';
+
+    // Bond type rates
+    const rateTable = {
+      license:     { excellent:1,   good:1.5,  fair:2.5, poor:4.5 },
+      bid:         { excellent:0.5, good:1,    fair:2,   poor:3.5 },
+      performance: { excellent:1,   good:1.75, fair:3,   poor:6   },
+    };
+    const bondTypeMap = {
+      bt_license:'license', bt_bid:'bid',
+      bt_performance:'performance', bt_multiple:'performance', bt_unknown:'performance'
+    };
+    const bondTypeKey = bondTypeMap[answerKeys.bond_type] || 'performance';
+    const rates = rateTable[bondTypeKey];
+
+    // Bond amount — from bond_range answer (midpoints)
+    const bondAmtMap = {
+      bond_small:25000, bond_mid:100000, bond_large:325000, bond_xlarge:750000
+    };
+    // Fall back to contract_size if bond_range missing
+    const contractAmtMap = {
+      cs_small:35000, cs_mid:150000, cs_large:500000, cs_xlarge:1500000
+    };
+    const bondAmt = bondAmtMap[answerKeys.bond_range]
+      || contractAmtMap[answerKeys.contract_size]
+      || 100000;
+
+    // Next tier
+    const nextTierMap = { poor:'fair', fair:'good', good:'excellent', excellent:'excellent' };
+    const nextTier = nextTierMap[tierKey];
+
+    // Premium calc
+    const calcPremium = (amt, tier) => Math.max(amt * (rates[tier] / 100), 100);
+    const currentPrem = calcPremium(bondAmt, tierKey);
+    const afterPrem   = calcPremium(bondAmt, nextTier);
+    const savings     = currentPrem - afterPrem;
+    const savings10yr = savings * 10;
+
+    // All tiers for credit impact chart
+    const allTiers = [
+      { id:'poor',      label:'Poor',      range:'<620',    color:'#e74c3c' },
+      { id:'fair',      label:'Fair',      range:'620–679', color:'#e67e22' },
+      { id:'good',      label:'Good',      range:'680–719', color:'#c9a84c' },
+      { id:'excellent', label:'Excellent', range:'720+',    color:'#27ae60' },
+    ];
+    const allPrems = allTiers.map(t => ({ ...t, prem: calcPremium(bondAmt, t.id) }));
+    const maxPrem = allPrems[allPrems.length - 1].prem; // poor is highest
+
+    // Revenue / ROI — from annual_revenue answer
+    const revenueMap = {
+      rev_under100:75000, rev_100_300:200000,
+      rev_300_750:500000, rev_750plus:1000000
+    };
+    const revenue = revenueMap[answerKeys.annual_revenue] || 200000;
+    const accessMults = { poor:0.35, fair:0.6, good:0.85, excellent:1 };
+    const currentAccess = revenue * accessMults[tierKey];
+    const improvedAccess = revenue * accessMults[nextTier];
+    const revenueUpside = (improvedAccess - currentAccess) * 0.15; // 15% margin est
+    const programCostEst = 3600;
+    const netGain = savings + revenueUpside - programCostEst;
+
+    // Bond type label
+    const bondTypeLabels = {
+      license:'Contractor License Bond', bid:'Bid Bond',
+      performance:'Performance / Payment Bond'
+    };
+    const bondTypeLabel = bondTypeLabels[bondTypeKey];
+
+    // Format helpers
+    const fmtC = n => '$' + Math.round(n).toLocaleString('en-US');
+
+    // ── BUILD HTML ──
+    const isBid = bondTypeKey === 'bid';
+    const bidBondAmt = bondAmt; // bond_range already represents bid bond for bt_bid
+
+    let html = '';
+
+    // Section 1 — Premium today vs after
+    html += `<span class="bond-section-title">Current Cost vs. After Bridgescale</span>`;
+    html += `<div class="bond-grid-2">
+      <div class="bond-metric">
+        <span class="bond-metric-label">Annual Premium — Today</span>
+        <div class="bond-metric-value">${fmtC(currentPrem)}</div>
+        <div class="bond-metric-sub">${rates[tierKey]}% rate · ${bondTypeLabel}</div>
+      </div>
+      <div class="bond-metric gold-metric">
+        <span class="bond-metric-label">After Bridgescale</span>
+        <div class="bond-metric-value gold">${fmtC(afterPrem)}</div>
+        <div class="bond-metric-sub">${rates[nextTier]}% rate · projected ${nextTier} credit tier</div>
+      </div>
+    </div>`;
+
+    if (savings > 10) {
+      html += `<div class="bond-grid-2">
+        <div class="bond-metric green-metric">
+          <span class="bond-metric-label">Annual Savings</span>
+          <div class="bond-metric-value green">${fmtC(savings)}</div>
+          <div class="bond-metric-sub">per year on this bond alone</div>
+        </div>
+        <div class="bond-metric gold-metric">
+          <span class="bond-metric-label">10-Year Projection</span>
+          <div class="bond-metric-value gold">${fmtC(savings10yr)}</div>
+          <div class="bond-metric-sub">total savings over 10 bond renewals</div>
+        </div>
+      </div>`;
+    }
+
+    // Section 2 — Credit impact chart
+    html += `<hr class="bond-divider">`;
+    html += `<span class="bond-section-title">Premium at Every Credit Tier</span>`;
+    allPrems.slice().reverse().forEach(t => {
+      const isActive = t.id === tierKey;
+      const pct = Math.min(100, Math.round((t.prem / allPrems[0].prem) * 100));
+      html += `
+        <div class="bond-savings-bar">
+          <div class="bond-tier-dot" style="background:${t.color}"></div>
+          <div class="bond-tier-label" style="color:${isActive ? '#fff' : 'var(--gray)'}; font-weight:${isActive ? '600':'400'}">
+            ${t.label} ${isActive ? '← you' : ''}
+          </div>
+          <div class="bond-bar-track">
+            <div class="bond-bar-fill" style="width:${pct}%;background:${t.color};opacity:${isActive?1:0.5}"></div>
+          </div>
+          <div class="bond-tier-amount" style="color:${t.color}">${fmtC(t.prem)}</div>
+        </div>`;
+    });
+
+    // Section 3 — ROI
+    html += `<hr class="bond-divider">`;
+    html += `<span class="bond-section-title">First-Year ROI of Fixing Your Credit</span>`;
+    html += `
+      <div class="bond-roi-row">
+        <span class="bond-roi-label">Bond premium savings</span>
+        <span class="bond-roi-value pos">+${fmtC(savings)}</span>
+      </div>
+      <div class="bond-roi-row">
+        <span class="bond-roi-label">Estimated revenue upside (15% margin)</span>
+        <span class="bond-roi-value pos">+${fmtC(revenueUpside)}</span>
+      </div>
+      <div class="bond-roi-row">
+        <span class="bond-roi-label">Est. Bridgescale program investment</span>
+        <span class="bond-roi-value neg">−${fmtC(programCostEst)}</span>
+      </div>
+      <div class="bond-roi-row" style="border-top:1px solid rgba(201,168,76,0.15);padding-top:14px;margin-top:4px;">
+        <span style="color:var(--gold);font-weight:600;font-size:14px;">Estimated Net First-Year Gain</span>
+        <span class="bond-roi-value ${netGain > 0 ? 'gold' : 'neg'}" style="font-size:18px;">${netGain > 0 ? '+' : ''}${fmtC(netGain)}</span>
+      </div>`;
+
+    // Section 4 — Bid bond callout if applicable
+    if (isBid) {
+      html += `
+        <div class="bid-bond-callout">
+          <p>Since you need a <strong>Bid Bond</strong> — keep in mind that many well-qualified contractors pay <strong>$0 in bid bond premiums</strong> through their bonding program once their credit and financial profile is strong. That's the goal Bridgescale is building you toward.</p>
+        </div>`;
+    }
+
+    html += `<p class="bond-note">* Estimates based on your scorecard answers. Actual premiums depend on surety underwriting, financials, work history, and carrier. Bond amount estimated from your target bond range. Revenue upside based on your stated annual revenue. Not a guarantee of insurability or pricing.</p>`;
+
+    document.getElementById('bond-impact-content').innerHTML = html;
+
+    // Animate bars after render
+    setTimeout(() => {
+      document.querySelectorAll('.bond-bar-fill').forEach(el => {
+        const w = el.style.width;
+        el.style.width = '0%';
+        setTimeout(() => { el.style.width = w; }, 50);
+      });
+    }, 300);
+
+  })();
+
+}
+
+// ─── SUBMIT ───────────────────────────────────────────────────────────────────
+function submitLead() {
+  const name  = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  if (!name || !email || !phone) {
+    // Shake empty fields
+    ['f-name','f-email','f-phone'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = '#e74c3c';
+        el.style.animation = 'shake 0.3s ease';
+        setTimeout(() => { el.style.animation = ''; el.style.borderColor = ''; }, 500);
+      }
+    });
+    return;
+  }
+
+  const firstName = name.split(' ')[0];
+
+  // Recompute score + answerKeys for the webhook payload (multi-select aware)
+  let _score = 0;
+  const _answerKeys = {};
+  questions.forEach(q => {
+    const ans = answers[q.id];
+    if (ans === undefined) return;
+    if (q.type === 'multi-select') {
+      if (Array.isArray(ans)) {
+        ans.forEach(idx => { _score += q.options[idx].value; });
+        _answerKeys[q.id] = ans.map(idx => q.options[idx].key);
+      }
+    } else {
+      _score += q.options[ans].value;
+      _answerKeys[q.id] = q.options[ans].key;
+    }
+  });
+  const _maxScore = questions.reduce((sum, q) => {
+    if (q.type === 'multi-select') {
+      const nonExclSum = q.options.filter(o => !o.exclusive).reduce((s, o) => s + Math.max(0, o.value), 0);
+      const bestExcl = Math.max(0, ...q.options.filter(o => o.exclusive).map(o => o.value));
+      return sum + Math.max(nonExclSum, bestExcl);
+    }
+    return sum + Math.max(...q.options.map(o => o.value));
+  }, 0);
+  const score = Math.round((_score / _maxScore) * 100);
+  const answerKeys = _answerKeys;
+
+  // Build active scenario keys
+  const activeScenarios = scenarioDefs
+    .filter(s => s.trigger(answerKeys))
+    .map(s => 'scenario::' + s.id);
+
+  // Build matched program tags
+  const matchedPrograms = programs
+    .filter(p => p.match(score, [], answerKeys))
+    .map(p => 'program::' + p.id);
+
+  // Score tier tag
+  const tier = score >= 83 ? 'positioned' : score >= 61 ? 'ready' : score >= 31 ? 'building' : 'not-ready';
+
+  // Entity age tag from answers
+  const ageKey = answerKeys['years_in_business'] || '';
+  const entityAgeTag = ageKey ? 'entity_age::' + ageKey.replace('age_','') : '';
+
+  // Bond type tag
+  const bondTypeKey = answerKeys['bond_type'] || '';
+  const bondTypeTag = bondTypeKey ? 'bond_type::' + bondTypeKey : '';
+
+  // Aged corp flag
+  const needsAgedCorp = ['age_new','age_early'].includes(answerKeys['years_in_business']);
+
+  // ── NEW: Awareness path tag (Path A/B/C/D) ─────────────────────────────────
+  const pathKey = answerKeys['starting_point'] || '';
+  const pathTag = pathKey ? 'path::' + pathKey.replace('path_','') : '';
+
+  // ── NEW: Timeline urgency tag ──────────────────────────────────────────────
+  const urgencyKey = answerKeys['timeline_urgency'] || '';
+  const urgencyTag = urgencyKey ? 'urgency::' + urgencyKey.replace('urgency_','') : '';
+
+  // ── NEW: Geographic coverage tag ───────────────────────────────────────────
+  const stateKey = answerKeys['operating_state'] || '';
+  const stateTag = stateKey ? 'coverage::' + stateKey.replace('state_','') : '';
+
+  // ── NEW: Recent setback tags (multi-select — fires one per check) ──────────
+  const setbackArr = Array.isArray(answerKeys['recent_setback']) ? answerKeys['recent_setback'] : [];
+  const setbackTags = setbackArr.map(k => 'setback::' + k.replace('setback_',''));
+  const multiSetbackFlag = (setbackArr.length >= 3 && !setbackArr.includes('setback_none'))
+    ? 'flag::multi-setback' : '';
+
+  // ── NEW: Certification tags (multi-select — fires one per check) ───────────
+  const certArr = Array.isArray(answerKeys['certifications']) ? answerKeys['certifications'] : [];
+  const certTags = certArr.map(k => 'cert::' + k.replace('cert_',''));
+  const govConFlag = certArr.some(k =>
+    ['cert_hubzone','cert_8a','cert_wosb','cert_sdvosb','cert_dbe'].includes(k)
+  ) ? 'flag::certified-gov-contractor' : '';
+
+  // ── NEW: Behavioral flags ──────────────────────────────────────────────────
+  const burnedFlag = answerKeys['starting_point'] === 'path_burned' ? 'flag::previously-burned' : '';
+  const urgentFlag = answerKeys['timeline_urgency'] === 'urgency_high' ? 'flag::urgent-deadline' : '';
+
+  // ── GHL Webhook ── (uncomment and replace URL when live)
+  // fetch('YOUR_GHL_WEBHOOK_URL', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify({
+  //     first_name:      firstName,
+  //     last_name:       name.split(' ').slice(1).join(' ') || '',
+  //     email,
+  //     phone,
+  //     scorecard_score: score,
+  //     scorecard_tier:  tier,
+  //     tags: [
+  //       'source::scorecard',
+  //       'score::' + tier,
+  //       ...matchedPrograms,
+  //       ...activeScenarios,
+  //       entityAgeTag,
+  //       bondTypeTag,
+  //       pathTag,
+  //       urgencyTag,
+  //       stateTag,
+  //       ...setbackTags,
+  //       ...certTags,
+  //       needsAgedCorp ? 'flag::aged-corp-required' : '',
+  //       multiSetbackFlag,
+  //       govConFlag,
+  //       burnedFlag,
+  //       urgentFlag,
+  //       'status::scorecard-complete',
+  //     ].filter(Boolean),
+  //     scorecard_version: 'v6',
+  //     answers: answerKeys,
+  //   })
+  // });
+
+
+  // ── Lead delivery (pre-GHL): send results to BridgeScale inbox via FormSubmit ──
+  try {
+    const _fd = new FormData();
+    _fd.append('name', name);
+    _fd.append('email', email);
+    _fd.append('phone', phone);
+    _fd.append('score', score + '/100 — ' + tier);
+    _fd.append('scenarios', activeScenarios.join(', ') || 'none');
+    _fd.append('programs', matchedPrograms.join(', ') || 'none');
+    _fd.append('answers', JSON.stringify(answerKeys));
+    _fd.append('_subject', 'Scorecard Lead — ' + name + ' (' + score + '/100 ' + tier + ')');
+    _fd.append('_captcha', 'false');
+    _fd.append('_template', 'table');
+    fetch('https://formsubmit.co/josh@bridgescaleadvisors.com', { method: 'POST', body: _fd, headers: { Accept: 'application/json' } }).catch(() => {});
+  } catch (e) {}
+
+  // Personalize the success message based on matched program
+  const progName = programs.find(p => p.match(score, [], answerKeys))?.name || 'Strategy Review';
+  document.getElementById('booking-success-title').textContent = `You're All Set, ${firstName}!`;
+  document.getElementById('booking-success-msg').innerHTML = `
+    Your scorecard results are saved and your profile has been created.<br><br>
+    You've been matched with the <strong style="color:var(--gold)">${progName}</strong>. 
+    Your advisor will have your full results — score, blockers, and program match — 
+    in front of them before your call.<br><br>
+    <strong style="color:var(--white)">Pick a time below to lock in your strategy call.</strong>
+  `;
+
+  // Show booking state
+  document.getElementById('cta-form-state').style.display = 'none';
+  const bs = document.getElementById('booking-success');
+  bs.style.display = 'block';
+  bs.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderQ();
+</script>
+</body>
+</html>
