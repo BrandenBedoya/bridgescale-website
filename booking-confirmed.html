@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Call Confirmed — Bridgescale Advisors</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #08111f;
+  --navy-mid:   #0f1e35;
+  --navy-light: #1a3055;
+  --gold:       #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dim:   #8a6e30;
+  --white:      #f0ece2;
+  --gray:       #7a8faa;
+  --gray-mid:   #3a506b;
+  --green:      #1a6b3c;
+  --green-lt:   #27ae60;
+  --orange:     #d4570a;
+  --red:        #c0392b;
+  --mgray:      #cccccc;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 100% 100%, rgba(26,48,85,0.5) 0%, transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.01) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.01) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none; z-index: 0;
+}
+
+.page { position: relative; z-index: 1; }
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+  background: rgba(8,17,31,0.9);
+  backdrop-filter: blur(12px);
+}
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; }
+.logo span { color: var(--gold); }
+.nav-confirm {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--green-lt);
+  background: rgba(39,174,96,0.1);
+  border: 1px solid rgba(39,174,96,0.2);
+  padding: 5px 14px;
+  border-radius: 2px;
+}
+
+/* ── HERO CONFIRM ── */
+.confirm-hero {
+  text-align: center;
+  padding: 64px 48px 48px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.confirm-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: rgba(39,174,96,0.12);
+  border: 2px solid rgba(39,174,96,0.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 28px;
+  animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1) both 0.1s;
+}
+@keyframes popIn {
+  from { opacity:0; transform:scale(0.4); }
+  to   { opacity:1; transform:scale(1); }
+}
+
+.confirm-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--green-lt);
+  margin-bottom: 14px;
+  opacity: 0;
+  animation: fadeUp 0.6s ease both 0.2s;
+}
+
+.confirm-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 6vw, 68px);
+  line-height: 0.9;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease both 0.3s;
+}
+.confirm-headline span { color: var(--gold); display: block; }
+
+.confirm-sub {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.75;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.7s ease both 0.4s;
+}
+
+/* ── CALL DETAILS CARD ── */
+.call-details {
+  max-width: 680px;
+  margin: 0 auto 32px;
+  padding: 0 48px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease both 0.5s;
+}
+.call-details-card {
+  background: var(--navy-mid);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px;
+  padding: 24px 28px;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.call-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.call-detail-icon {
+  font-size: 18px;
+}
+.call-detail-text strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+}
+.call-detail-text span {
+  font-size: 12px;
+  color: var(--gray);
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  max-width: 680px;
+  margin: 0 auto 32px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease both 0.55s;
+}
+.divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+.divider-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── MYSCOREIQ SECTION ── */
+.myscore-section {
+  max-width: 680px;
+  margin: 0 auto 48px;
+  padding: 0 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease both 0.6s;
+}
+
+.myscore-card {
+  background: var(--navy-mid);
+  border: 1px solid rgba(201,168,76,0.22);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.myscore-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.myscore-header {
+  padding: 28px 32px 0;
+}
+.myscore-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 5px 12px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+.myscore-eyebrow-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.myscore-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 1px;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.myscore-headline span { color: var(--gold); }
+
+.myscore-body {
+  font-size: 14.5px;
+  color: var(--gray);
+  line-height: 1.75;
+  font-weight: 300;
+  margin-bottom: 24px;
+  max-width: 520px;
+}
+.myscore-body strong { color: var(--white); font-weight: 500; }
+
+/* Why it matters list */
+.myscore-why {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0 32px 0;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.why-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 3px;
+}
+.why-check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(39,174,96,0.15);
+  border: 1px solid rgba(39,174,96,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+  color: var(--green-lt);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.why-text {
+  font-size: 12.5px;
+  color: var(--gray);
+  line-height: 1.5;
+  font-weight: 300;
+}
+.why-text strong {
+  display: block;
+  color: var(--white);
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* CTA block */
+.myscore-cta-block {
+  padding: 24px 32px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.btn-myscore {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 28px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  animation: pulse-gold 3s ease-in-out infinite 1.5s;
+}
+.btn-myscore:hover {
+  background: var(--gold-light);
+  box-shadow: 0 6px 28px rgba(201,168,76,0.4);
+  transform: translateY(-1px);
+}
+@keyframes pulse-gold {
+  0%,100% { box-shadow: 0 4px 20px rgba(201,168,76,0.2); }
+  50%      { box-shadow: 0 4px 32px rgba(201,168,76,0.45); }
+}
+.myscore-fine {
+  font-size: 11.5px;
+  color: var(--gray-mid);
+  font-weight: 300;
+  line-height: 1.6;
+  font-family: 'DM Mono', monospace;
+}
+.myscore-fine strong { color: var(--gray); font-weight: 500; }
+
+/* optional done toggle */
+.done-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: rgba(39,174,96,0.05);
+  border-top: 1px solid rgba(39,174,96,0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.done-toggle:hover { background: rgba(39,174,96,0.1); }
+.done-toggle input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--green-lt);
+  cursor: pointer;
+}
+.done-toggle label {
+  font-size: 12.5px;
+  color: var(--gray);
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.5px;
+}
+.done-success {
+  display: none;
+  padding: 14px 32px;
+  background: rgba(39,174,96,0.08);
+  border-top: 1px solid rgba(39,174,96,0.15);
+}
+.done-success-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--green-lt);
+  font-weight: 500;
+}
+
+/* ── WHAT TO EXPECT ── */
+.expect-section {
+  max-width: 680px;
+  margin: 0 auto 48px;
+  padding: 0 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease both 0.7s;
+}
+.expect-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.expect-sub {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.expect-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.expect-step {
+  display: flex;
+  gap: 18px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+}
+.expect-step:last-child { border-bottom: none; }
+.step-line-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.step-connector {
+  width: 1px;
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  margin-top: 6px;
+  min-height: 20px;
+}
+.expect-step:last-child .step-connector { display: none; }
+.step-content { padding-top: 4px; }
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.step-desc {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 300;
+  line-height: 1.6;
+}
+.step-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 24px 48px;
+  text-align: center;
+}
+footer p {
+  font-size: 11px;
+  color: var(--gray-mid);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.3px;
+  line-height: 1.7;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%,60% { transform: translateX(-4px); }
+  40%,80% { transform: translateX(4px); }
+}
+
+/* ── CREDENTIAL FORM ── */
+.cred-section {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 32px 28px;
+}
+.cred-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.cred-step-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 4px 12px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.cred-header-text strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+.cred-header-text span {
+  font-size: 12px;
+  color: var(--gray);
+  font-weight: 300;
+}
+.cred-security-note {
+  font-size: 12px;
+  color: var(--green-lt);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.3px;
+  background: rgba(39,174,96,0.07);
+  border: 1px solid rgba(39,174,96,0.15);
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+}
+.cred-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.cred-field-group { display: flex; flex-direction: column; gap: 5px; }
+.cred-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.cred-input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
+  padding: 12px 16px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.cred-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+}
+.cred-input::placeholder { color: rgba(255,255,255,0.2); }
+.cred-input-short { max-width: 120px; letter-spacing: 4px; }
+.cred-pass-wrap { position: relative; }
+.cred-toggle-pass {
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  background: none; border: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1px;
+  color: var(--gold); cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.cred-toggle-pass:hover { color: var(--gold-light); }
+.cred-field-note {
+  font-size: 11px;
+  color: var(--gray-mid);
+  font-family: 'DM Mono', monospace;
+}
+.btn-cred-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 10px;
+}
+.btn-cred-submit:hover {
+  background: var(--gold-light);
+  box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+  transform: translateY(-1px);
+}
+.cred-fine {
+  font-size: 10.5px;
+  color: var(--gray-mid);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.2px;
+  line-height: 1.6;
+  text-align: center;
+}
+.cred-success {
+  display: none;
+  text-align: center;
+  padding: 16px 0 8px;
+  animation: fadeUp 0.5s ease both;
+}
+.cred-success-icon { font-size: 36px; margin-bottom: 12px; }
+.cred-success-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.cred-success-msg {
+  font-size: 13.5px;
+  color: var(--gray);
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 680px) {
+  nav { padding: 16px 20px; }
+  .confirm-hero, .call-details, .section-divider,
+  .myscore-section, .expect-section { padding-left: 20px; padding-right: 20px; }
+  .myscore-why { grid-template-columns: 1fr; }
+  .myscore-cta-block { flex-direction: column; align-items: flex-start; }
+  .cred-section { padding: 20px; }
+  footer { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">BRIDGE<span>SCALE</span> ADVISORS</div>
+    <div class="nav-confirm">✓ Call Confirmed</div>
+  </nav>
+
+  <!-- CONFIRM HERO -->
+  <div class="confirm-hero">
+    <div class="confirm-icon">📅</div>
+    <div class="confirm-eyebrow">Strategy Call Confirmed</div>
+    <h1 class="confirm-headline">
+      You're On
+      <span>The Calendar.</span>
+    </h1>
+    <p class="confirm-sub">
+      Your strategy call is booked. Your advisor will have your Capital Readiness Scorecard results in front of them before you connect. There's one thing that will make your 30 minutes significantly more valuable — and it takes less than 5 minutes to set up.
+    </p>
+  </div>
+
+  <!-- CALL DETAILS -->
+  <div class="call-details">
+    <div class="call-details-card">
+      <div class="call-detail-item">
+        <div class="call-detail-icon">⏱️</div>
+        <div class="call-detail-text">
+          <strong>30 Minutes</strong>
+          <span>Strategy Call</span>
+        </div>
+      </div>
+      <div class="call-detail-item">
+        <div class="call-detail-icon">📋</div>
+        <div class="call-detail-text">
+          <strong>Your Scorecard Ready</strong>
+          <span>Reviewed Before Call</span>
+        </div>
+      </div>
+      <div class="call-detail-item">
+        <div class="call-detail-icon">📧</div>
+        <div class="call-detail-text">
+          <strong>Confirmation Sent</strong>
+          <span>Check Your Email</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="section-divider">
+    <div class="divider-line"></div>
+    <div class="divider-label">One Step Before Your Call</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- MYSCOREIQ SECTION -->
+  <div class="myscore-section">
+    <div class="myscore-card">
+
+      <div class="myscore-header">
+        <div class="myscore-eyebrow">
+          <div class="myscore-eyebrow-dot"></div>
+          Action Required Before Your Call
+        </div>
+        <h2 class="myscore-headline">Set Up Credit Monitoring<br><span>So We Can See Your Full Picture</span></h2>
+        <p class="myscore-body">
+          Your scorecard showed us your profile from 30,000 feet. To close your gaps the right way, your advisor needs to see your <strong>actual credit file</strong> — the tradelines, the negative items, the inquiry history — before you connect. <strong>Without this, we're working blind for the first half of your call.</strong>
+        </p>
+      </div>
+
+      <div class="myscore-why">
+        <div class="why-item">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <strong>Your call starts at the solution</strong>
+            No time wasted gathering info — we already know your file
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <strong>Accurate dispute strategy</strong>
+            Your advisor can identify exact items to target before you speak
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <strong>Realistic timeline</strong>
+            We can give you a real estimate on score improvement — not a guess
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <strong>Ongoing monitoring included</strong>
+            Track your score improvements in real time as disputes process
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: Set up + Step 2: Submit credentials -->
+      <div class="myscore-cta-block">
+        <a class="btn-myscore" href="https://www.myscoreiq.com/industry-score-preferred.aspx?offercode=432140PS" target="_blank" rel="noopener">
+          Step 1 — Set Up MyScoreIQ Now →
+        </a>
+        <div class="myscore-fine">
+          Takes less than 5 minutes<br>
+          <strong>Then just have your login ready for the call</strong>
+        </div>
+      </div>
+
+      <div class="cred-section" id="cred-section">
+        <div class="cred-header">
+          <div class="cred-step-badge">Step 2</div>
+          <div class="cred-header-text">
+            <strong>Have Your MyScoreIQ Login Ready For Your Call</strong>
+            <span>Your advisor will securely verify report access with you live on the call — never send passwords by email or forms.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="done-success" id="done-success" style="display:none;">
+        <div class="done-success-inner">
+          ✓ &nbsp;You're all set. Your advisor will pull your report before the call. See you soon.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WHAT TO EXPECT ON THE CALL -->
+  <div class="expect-section">
+    <h2 class="expect-heading">What Happens On Your Call</h2>
+    <p class="expect-sub">Your 30 minutes is structured so you leave with a clear path — not more questions.</p>
+
+    <div class="expect-steps">
+      <div class="expect-step">
+        <div class="step-line-wrap">
+          <div class="step-num">1</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-time">Minutes 0–5</div>
+          <div class="step-title">Score + Profile Review</div>
+          <div class="step-desc">Your advisor walks through your Capital Readiness Score, your active blockers, and your credit file — confirming the full picture before building your plan.</div>
+        </div>
+      </div>
+      <div class="expect-step">
+        <div class="step-line-wrap">
+          <div class="step-num">2</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-time">Minutes 5–20</div>
+          <div class="step-title">Gap Analysis + Roadmap</div>
+          <div class="step-desc">We go through each active scenario in your profile — what's blocking you, why it's blocking you, and exactly what needs to happen to close it. You'll know the sequence before the call ends.</div>
+        </div>
+      </div>
+      <div class="expect-step">
+        <div class="step-line-wrap">
+          <div class="step-num">3</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-time">Minutes 20–30</div>
+          <div class="step-title">Program Match + Next Steps</div>
+          <div class="step-desc">Based on your profile, your advisor presents the program that closes your gaps fastest — with a clear timeline and what getting started looks like today.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      Bridgescale Advisors  ·  Questions? Email us at josh@bridgescaleadvisors.com<br>
+      You'll receive a calendar confirmation and reminders via email and SMS.
+    </p>
+  </footer>
+
+</div>
+
+
+</body>
+</html>
