@@ -6,7 +6,7 @@
 <meta name="description" content="Pre-call intake questionnaire for BridgeScale Advisors clients.">
 <title>Contractor Readiness Intake — BridgeScale Advisors</title>
 <style>
-:root{--navy:#1B2A4A;--gold:#B89630;--bg:#F7F6F2;--ink:#1a1a1a;--muted:#5a6273;--line:#e2ddd2}
+:root{--navy:#0f1e35;--gold:#c9a84c;--bg:#F7F6F2;--ink:#1a1a1a;--muted:#5a6273;--line:#e2ddd2}
 html{color-scheme:light only}
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -49,7 +49,7 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:
 .bsi-input:focus{outline:none;border-color:var(--gold)}
 .bsi-group{display:grid;gap:6px}
 .bsi-choice{font-size:14px;display:flex;align-items:flex-start;gap:8px;line-height:1.45;font-weight:normal;color:var(--ink)}
-.bsi-choice input{margin-top:2px;accent-color:#1B2A4A}
+.bsi-choice input{margin-top:2px;accent-color:#0f1e35}
 .bsi-missing{background:#fdf3f3;border-left:3px solid #c0392b;padding-left:10px;border-radius:4px}
 .bsi-status{font-size:13px;color:var(--muted);min-height:18px}
 .bsi-error{color:#c0392b;font-weight:bold}
@@ -87,10 +87,10 @@ const UI = {
     submit: "Submit My Intake",
     saved: "Progress saved on this device.",
     missing: "Please complete the highlighted required fields.",
-    sent: "Thank you — your intake has been received. We'll review it before your call.",
+    sent: "Thank you — your intake has been received. I'll review it before your call.",
     mailtoNote: "If the submit button doesn't work on your network, click here to send your answers by email instead.",
     pctComplete: (pct) => `${pct}% completed`,
-    disclaimer: "BridgeScale Advisors is a business advisory firm. We are not a lender, bank, law firm, accounting firm, or licensed insurance producer. No specific credit, funding, bonding, or contract outcome is guaranteed. Consumers may dispute inaccurate information directly with the credit bureaus at no cost.",
+    disclaimer: "BridgeScale Advisors is a business advisory firm. BridgeScale is not a lender, bank, law firm, accounting firm, or licensed insurance producer. No specific credit, funding, bonding, or contract outcome is guaranteed. Consumers may dispute inaccurate information directly with the credit bureaus at no cost.",
 };
 const SECTIONS = [
     {

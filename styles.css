@@ -1,5 +1,5 @@
 
-:root{--navy:#1B2A4A;--deep:#10192E;--gold:#B89630;--gold-lt:#D4B855;--bone:#F7F5F0;--white:#FFFFFF;--slate:#55606E;--line:#D8D3C8;}
+:root{--navy:#0f1e35;--deep:#08111f;--gold:#c9a84c;--gold-lt:#e8c97a;--bone:#f0ece2;--white:#FFFFFF;--slate:#55606E;--line:#D8D3C8;}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Public Sans',system-ui,sans-serif;color:var(--navy);background:var(--bone);line-height:1.6;font-size:17px}
@@ -36,7 +36,7 @@ header{background:var(--navy);color:var(--white);position:sticky;top:0;z-index:5
 .door-track{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid rgba(255,255,255,.2)}
 .door{padding:18px 14px;border-right:1px solid rgba(255,255,255,.2);text-decoration:none;transition:background .15s}
 .door:last-child{border-right:none}
-.door:hover{background:rgba(184,150,48,.12)}
+.door:hover{background:rgba(201,168,76,.12)}
 .door .num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold-lt);letter-spacing:.12em}
 .door .nm{font-family:'Zilla Slab',serif;font-size:16px;font-weight:600;margin-top:4px}
 .door .st{font-size:12px;opacity:.65;margin-top:2px}
